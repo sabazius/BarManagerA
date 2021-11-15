@@ -7,21 +7,21 @@ namespace BarManagerA.Models.DTO
     class Bill_Models
     {
         public int d_ID { get; set; }
-        //number
+        
 
-        public float d_Amount { get; set; }
-        //mount
+        public float Amount { get; set; }
+        
 
-        public bool d_BillStatus { get; set; }
-        // BillStatus enum
+        public bool BillStatus { get; set; }
+        
 
-        public string d_PaymentType { get; set; }
+        public string PaymentType { get; set; }
         // PaymentType enum
 
-        public int d_Created { get; set; }
+        public int Created { get; set; }
         //date and time
 
-        public int d_Finished { get; set; }
+        public int Finished { get; set; }
         //date and time
 
     }
