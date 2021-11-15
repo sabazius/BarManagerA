@@ -16,13 +16,13 @@ namespace BarManagerA.Models.DTO
         
 
         public string PaymentType { get; set; }
-        // PaymentType enum
+        
 
         public int Created { get; set; }
-        //date and time
+        
 
         public int Finished { get; set; }
-        //date and time
+        
 
     }
 }
