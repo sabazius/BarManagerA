@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BarManagerA.Models.DTO;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
@@ -8,31 +9,59 @@ namespace BarManagerA.Controllers
     [Route("[controller]")]
     public class BillController : ControllerBase
     {
-        private readonly ILogger<TagController> _logger;
+        private readonly ILogger<BillController> _logger;
         public BillController(ILogger<BillController> logger)
         {
-              _logger = logger;
+            _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<Bill_Models> Get()
+        public IEnumerable<Bill> Get()
         {
-            return new List<Bill_Models>()
+            return new List<Bill>()
             {
                 {
-                    new Bill_Models()
+                    new Bill()
                     {
-                        Id = 1,
-                        Name = "TestName"
+                       Amount = 5
                     }
                 },
+
                 {
-                    new Bill_Models()
+                    new Bill()
                     {
-                        Id = 2,
-                        Name = "TestName2"
+                        BillStatus = true
+                    }
+                },
+
+                {
+                    new Bill()
+                    {
+                        Created = 14112021 
+                    }
+                },
+
+                {
+                    new Bill()
+                    {
+                        Finished = 15112021
+                    }
+                },
+
+                {
+                    new Bill()
+                    {
+                        ID = 749
+                    }
+                },
+
+                {
+                    new Bill()
+                    {
+                        PaymentType = "bankTransfer"
                     }
                 }
+
             };
         }
     }

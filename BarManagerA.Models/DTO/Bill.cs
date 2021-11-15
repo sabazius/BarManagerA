@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BarManagerA.Models.DTO
 {
-    class Bill_Models
+   public class Bill
     {
         public int d_ID { get; set; }
         
