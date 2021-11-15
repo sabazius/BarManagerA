@@ -1,4 +1,5 @@
 ﻿using BarManagerA.Models.DTO;
+using BarManagerA.Models.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -23,46 +24,29 @@ namespace BarManagerA.Controllers
                 {
                     new Bill()
                     {
-                       Amount = 5
-                    }
+                       Amount = 5,
+                        BillStatus = BillStatus.Paid,
+                        Created = 14112021,
+                         Finished = 15112021,
+                         ID = 749,
+                         PaymentType = "bankTransfer"
+                                }
                 },
 
                 {
                     new Bill()
                     {
-                        BillStatus = true
+                                 Amount = 2,
+            BillStatus = BillStatus.WaitingToPay,
+            Created = 13112021,
+              Finished = 14112021,
+               ID = 748,
+               PaymentType = "Cash"
+
                     }
                 },
 
-                {
-                    new Bill()
-                    {
-                        Created = 14112021 
-                    }
-                },
-
-                {
-                    new Bill()
-                    {
-                        Finished = 15112021
-                    }
-                },
-
-                {
-                    new Bill()
-                    {
-                        ID = 749
-                    }
-                },
-
-                {
-                    new Bill()
-                    {
-                        PaymentType = "bankTransfer"
-                    }
-                }
-
-            };
+             };
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BarManagerA.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,13 +7,13 @@ namespace BarManagerA.Models.DTO
 {
    public class Bill
     {
-        public int d_ID { get; set; }
+        public int ID { get; set; }
         
 
-        public float Amount { get; set; }
+        public double Amount{ get; set; }
         
 
-        public bool BillStatus { get; set; }
+        public BillStatus BillStatus { get; set; }
         
 
         public string PaymentType { get; set; }
