@@ -24,25 +24,24 @@ namespace BarManagerA.Controllers
                 {
                     new Bill()
                     {
-                       Amount = 5,
-                        BillStatus = BillStatus.Paid,
-                       DateTimeCreated = 14112021,
-                         DateTimeFinished = 15112021,
-                         ID = 749,
-                         PaymentType = "bankTransfer"
-                                }
+                    Amount = 5,
+                    BillStatus = BillStatus.Paid,
+                    DateTimeCreated = 14112021,
+                    DateTimeFinished = 15112021,
+                    ID = 749,
+                    PaymentType = "bankTransfer"
+                    }
                 },
 
                 {
                     new Bill()
                     {
-                                 Amount = 2,
-            BillStatus = BillStatus.WaitingToPay,
-            DateTimeCreated = 13112021,
-              DateTimeFinished = 14112021,
-               ID = 748,
-               PaymentType = "Cash"
-
+                    Amount = 2,
+                    BillStatus = BillStatus.WaitingToPay,
+                    DateTimeCreated = 13112021,
+                    DateTimeFinished = 14112021,
+                    ID = 748,
+                    PaymentType = "Cash"
                     }
                 },
 
