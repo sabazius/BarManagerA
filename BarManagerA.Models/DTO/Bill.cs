@@ -19,10 +19,10 @@ namespace BarManagerA.Models.DTO
         public string PaymentType { get; set; }
         
 
-        public int Created { get; set; }
+        public int DateTimeCreated { get; set; }
         
 
-        public int Finished { get; set; }
+        public int DateTimeFinished { get; set; }
         
 
     }
