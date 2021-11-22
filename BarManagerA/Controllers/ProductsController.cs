@@ -1,14 +1,10 @@
 ﻿using BarManagerA.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BarManagerA.Host.Controllers
 {
     [ApiController]
-    [Route("[controller")]
+    [Route("[controller]")]
     public class ProductsController : ControllerBase
     {
         public ProductsController()
