@@ -29,6 +29,7 @@ namespace BarManagerA
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ITagRepository, TagInMemoryRepository>();
+            services.AddSingleton<IClientRepository, ClientInMemoryRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
