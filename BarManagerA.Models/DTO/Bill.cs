@@ -19,11 +19,11 @@ namespace BarManagerA.Models.DTO
         public string PaymentType { get; set; }
         
 
-        public int DateTimeCreated { get; set; }
-        
+        public DateTime DateTimeCreated { get; set; }
+        //DateTimeCreated = DateTime.Now;
 
-        public int DateTimeFinished { get; set; }
-        
+        public DateTime DateTimeFinished { get; set; }
+        //DateTimeFinished = DateTime.Get;
 
     }
 }
