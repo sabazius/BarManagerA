@@ -1,26 +1,40 @@
 ﻿using BarManagerA.Models.DTO;
+using BarManagerA.Models.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace BarManagerA.DL.InMemoryDB
 {
     public static class BillInMemoryCollection
     {
-        public static List<Bill> TagDb = new List<Bill>()
+        public static List<Bill> BillDb = new List<Bill>()
         {
             new Bill()
             {
-                Id = 1,
-                Name = "TestNameA"
+                    Amount = 5,
+                    BillStatus = BillStatus.Paid,
+                    DateTimeCreated = DateTime.Now,
+                    DateTimeFinished = DateTime.Now,
+                    ID = 749,
+                    PaymentType = PaymentType.CreditCard
             },
             new Bill()
             {
-                Id = 2,
-                Name = "TestNameB"
+                    Amount = 5,
+                    BillStatus = BillStatus.Paid,
+                    DateTimeCreated = DateTime.Now,
+                    DateTimeFinished = DateTime.Now,
+                    ID = 748,
+                    PaymentType = PaymentType.Cash
             },
             new Bill()
             {
-                Id = 3,
-                Name = "TestNameC"
+                    Amount = 5,
+                    BillStatus = BillStatus.Paid,
+                    DateTimeCreated = DateTime.Now,
+                    DateTimeFinished = DateTime.Now,
+                    ID = 999,
+                    PaymentType = PaymentType.CreditCard
             }
         };
     }

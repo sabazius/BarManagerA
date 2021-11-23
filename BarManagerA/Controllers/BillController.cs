@@ -29,8 +29,8 @@ namespace BarManagerA.Controllers
                     BillStatus = BillStatus.Paid,
                     DateTimeCreated = DateTime.Now,
                     DateTimeFinished = DateTime.Now,
-                    ID = 749,
-                    PaymentType = "bankTransfer"
+                    ID = 888,
+                    PaymentType = PaymentType.CreditCard
                     }
                 },
 
@@ -41,8 +41,8 @@ namespace BarManagerA.Controllers
                     BillStatus = BillStatus.WaitingToPay,
                     DateTimeCreated = DateTime.Now,
                     DateTimeFinished = DateTime.Now,
-                    ID = 748,
-                    PaymentType = "Cash"
+                    ID = 848,
+                    PaymentType = PaymentType.CreditCard
                     }
                 },
 

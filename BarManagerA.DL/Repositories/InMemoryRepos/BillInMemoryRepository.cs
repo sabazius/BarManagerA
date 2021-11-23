@@ -16,14 +16,14 @@ namespace BarManagerA.DL.Repositories.InMemoryRepos
 
         public Bill Create(Bill bill)
         {
-            BillInMemoryRepository.BillDb.Add(bill);
+            BillInMemoryCollection.BillDb.Add(bill);
 
             return bill;
         }
 
         public Bill Delete(int id)
         {
-            var bill = BillInMemoryCollection.BillDb.FirstOrDefault(x => x.Id == id);
+            var bill = BillInMemoryCollection.BillDb.FirstOrDefault(x => x.ID == id);
 
             if (bill != null) BillInMemoryCollection.BillDb.Remove(bill);
 
@@ -37,15 +37,19 @@ namespace BarManagerA.DL.Repositories.InMemoryRepos
 
         public Bill GetById(int id)
         {
-            return BillInMemoryCollection.BillDb.FirstOrDefault(x => x.Id == id);
+            return BillInMemoryCollection.BillDb.FirstOrDefault(x => x.ID == id);
         }
 
         public Bill Update(Bill bill)
         {
-            var item = BillInMemoryCollection.BillDb.FirstOrDefault(x => x.Id == bill.Id);
+            var item = BillInMemoryCollection.BillDb.FirstOrDefault(x => x.ID == bill.ID);
 
-            item.Name = bill.Name;
-
+            item.Amount = bill.Amount;
+            item.BillStatus = bill.BillStatus;
+            item.DateTimeCreated = bill.DateTimeCreated;
+            item.DateTimeFinished = bill.DateTimeFinished;
+            item.PaymentType = bill.PaymentType;
+            
             return bill;
         }
     }

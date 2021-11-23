@@ -14,14 +14,14 @@ namespace BarManagerA.Models.DTO
         public BillStatus BillStatus { get; set; }
         
 
-        public string PaymentType { get; set; }
+        public PaymentType PaymentType { get; set; }
         
 
         public DateTime DateTimeCreated { get; set; }
-        //DateTimeCreated = DateTime.Now;
+      
 
         public DateTime DateTimeFinished { get; set; }
-        //DateTimeFinished = DateTime.Get;
+       
 
     }
 }
