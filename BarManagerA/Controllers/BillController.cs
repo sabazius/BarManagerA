@@ -26,8 +26,8 @@ namespace BarManagerA.Controllers
                     {
                     Amount = 5,
                     BillStatus = BillStatus.Paid,
-                    DateTimeCreated = 14112021,
-                    DateTimeFinished = 15112021,
+                    DateTimeCreated = DateTime.Now,
+                    DateTimeFinished = DateTime.Now,
                     ID = 749,
                     PaymentType = "bankTransfer"
                     }
@@ -38,8 +38,8 @@ namespace BarManagerA.Controllers
                     {
                     Amount = 2,
                     BillStatus = BillStatus.WaitingToPay,
-                    DateTimeCreated = 13112021,
-                    DateTimeFinished = 14112021,
+                    DateTimeCreated = DateTime.Now,
+                    DateTimeFinished = DateTime.Now,
                     ID = 748,
                     PaymentType = "Cash"
                     }
