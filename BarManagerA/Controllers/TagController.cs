@@ -1,27 +1,27 @@
-﻿using BarManagerA.DL.Interfaces;
+﻿using BarManagerA.BL.Interfaces;
 using BarManagerA.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace BarManagerA.Controllers
+namespace BarManagerA.Host.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class TagController : ControllerBase
     {
         private readonly ILogger<TagController> _logger;
-        private readonly ITagRepository _tagRepository;
+        private readonly ITagService _tagService;
 
-        public TagController(ILogger<TagController> logger, ITagRepository tagRepository)
+        public TagController(ILogger<TagController> logger, ITagService tagService)
         {
             _logger = logger;
-            _tagRepository = tagRepository;
+            _tagService = tagService;
         }
 
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var result = _tagRepository.GetAll();
+            var result = _tagService.GetAll();
 
             if (result != null) return Ok(result);
 
@@ -31,7 +31,7 @@ namespace BarManagerA.Controllers
         [HttpGet("getById")]
         public IActionResult Get(int id)
         {
-            var result =  _tagRepository.GetById(id);
+            var result =  _tagService.GetById(id);
 
             if (result != null) return Ok(result);
 
@@ -43,7 +43,7 @@ namespace BarManagerA.Controllers
         {
             if (tag == null) return BadRequest();
 
-            var result = _tagRepository.Create(tag);
+            var result = _tagService.Create(tag);
 
             return Ok(result);
         }
@@ -53,7 +53,7 @@ namespace BarManagerA.Controllers
         {
             if (id <= 0) return BadRequest(id);
 
-            var result = _tagRepository.Delete(id);
+            var result = _tagService.Delete(id);
 
             if (result != null) return Ok(result);
 
@@ -65,11 +65,11 @@ namespace BarManagerA.Controllers
         {
             if (tag == null) return BadRequest();
 
-            var searchTag = _tagRepository.GetById(tag.Id);
+            var searchTag = _tagService.GetById(tag.Id);
 
             if (searchTag == null) return NotFound(tag);
 
-            var result = _tagRepository.Update(tag);
+            var result = _tagService.Update(tag);
 
             if (result != null) return Ok(result);
 
