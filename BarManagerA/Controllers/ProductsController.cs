@@ -1,5 +1,8 @@
-﻿using BarManagerA.Models.DTO;
+﻿using BarManagerA.DL.Interfaces;
+using BarManagerA.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace BarManagerA.Host.Controllers
 {
@@ -7,20 +10,46 @@ namespace BarManagerA.Host.Controllers
     [Route("[controller]")]
     public class ProductsController : ControllerBase
     {
-        public ProductsController()
+        private readonly ILogger<ProductsController> _logger;
+        private readonly IProductsRepository _productsRepository;
+
+        public ProductsController(ILogger<ProductsController> logger, IProductsRepository productsRepository)
         {
+            _logger = logger;
+            _productsRepository = productsRepository;
+        }
+
+        [HttpGet("getAll")]
+        public IActionResult GetAll()
+        {
+            var result = _productsRepository.GetAll();
+
+            if (result != null) return Ok(result);
+
+            return NoContent();
+
 
         }
 
-        [HttpGet]
-        public Products Get()
+        [HttpGet("getById")]
+        public IActionResult Get(int id)
         {
-            return new Products()
-            {
-                Id = 1,
-                Name = "TestProducts",
-                Price = 1
-            };
+            var result = _productsRepository.GetById(id);
+
+            if (result != null) return Ok(result);
+
+            return NotFound(result);
+
+        }
+
+        [HttpPost("Create")]
+        public IActionResult Create ([FromBody] Products products)
+        {
+            if (products == null) return BadRequest();
+
+            var result = _productsRepository.Create(products);
+
+            return Ok(result);
         }
     }
 }
