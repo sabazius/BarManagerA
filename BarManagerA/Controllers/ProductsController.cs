@@ -1,4 +1,5 @@
-﻿using BarManagerA.DL.Interfaces;
+﻿using BarManagerA.BL.Interfaces;
+using BarManagerA.DL.Interfaces;
 using BarManagerA.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,18 +12,18 @@ namespace BarManagerA.Host.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly ILogger<ProductsController> _logger;
-        private readonly IProductsRepository _productsRepository;
+        private readonly IProductsService _productsService;
 
-        public ProductsController(ILogger<ProductsController> logger, IProductsRepository productsRepository)
+        public ProductsController(ILogger<ProductsController> logger, IProductsService productsService)
         {
             _logger = logger;
-            _productsRepository = productsRepository;
+            _productsService = productsService;
         }
 
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var result = _productsRepository.GetAll();
+            var result = _productsService.GetAll();
 
             if (result != null) return Ok(result);
 
@@ -34,7 +35,7 @@ namespace BarManagerA.Host.Controllers
         [HttpGet("getById")]
         public IActionResult Get(int id)
         {
-            var result = _productsRepository.GetById(id);
+            var result = _productsService.GetById(id);
 
             if (result != null) return Ok(result);
 
@@ -47,7 +48,7 @@ namespace BarManagerA.Host.Controllers
         {
             if (products == null) return BadRequest();
 
-            var result = _productsRepository.Create(products);
+            var result = _productsService.Create(products);
 
             return Ok(result);
         }
