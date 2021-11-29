@@ -15,7 +15,9 @@ using BarManagerA.BL.Interfaces;
 using BarManagerA.BL.Services;
 using BarManagerA.DL.Interfaces;
 using BarManagerA.DL.Repositories.InMemoryRepos;
+using BarManagerA.Host.Extensions;
 using Serilog;
+using ILogger = Serilog.ILogger;
 
 namespace BarManagerA
 {
@@ -49,7 +51,7 @@ namespace BarManagerA
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger logger)
         {
             if (env.IsDevelopment())
             {
@@ -57,6 +59,8 @@ namespace BarManagerA
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BarManagerA v1"));
             }
+
+            app.ConfigureExceptionHandler(logger);
 
             app.UseHttpsRedirection();
 
