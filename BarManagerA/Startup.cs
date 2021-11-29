@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BarManagerA.BL.Interfaces;
+using BarManagerA.BL.Services;
 using BarManagerA.DL.Interfaces;
 using BarManagerA.DL.Repositories.InMemoryRepos;
 
@@ -29,9 +31,12 @@ namespace BarManagerA
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ITagRepository, TagInMemoryRepository>();
-
             services.AddSingleton<IProductsRepository,ProductsInMemoryRepository>();
             services.AddSingleton<IBillRepository, BillInMemoryRepository>(); //Dimitar Chervenkov
+
+            services.AddSingleton<ITagService, TagService>();
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
