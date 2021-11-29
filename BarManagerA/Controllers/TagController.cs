@@ -1,7 +1,6 @@
 ﻿using BarManagerA.BL.Interfaces;
 using BarManagerA.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace BarManagerA.Host.Controllers
 {
@@ -9,12 +8,10 @@ namespace BarManagerA.Host.Controllers
     [Route("[controller]")]
     public class TagController : ControllerBase
     {
-        private readonly ILogger<TagController> _logger;
         private readonly ITagService _tagService;
 
-        public TagController(ILogger<TagController> logger, ITagService tagService)
+        public TagController(ITagService tagService)
         {
-            _logger = logger;
             _tagService = tagService;
         }
 
