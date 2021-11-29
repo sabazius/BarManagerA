@@ -15,6 +15,7 @@ using BarManagerA.BL.Interfaces;
 using BarManagerA.BL.Services;
 using BarManagerA.DL.Interfaces;
 using BarManagerA.DL.Repositories.InMemoryRepos;
+using Serilog;
 
 namespace BarManagerA
 {
@@ -30,12 +31,15 @@ namespace BarManagerA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(Log.Logger);
+
             services.AddSingleton<ITagRepository, TagInMemoryRepository>();
             services.AddSingleton<IProductsRepository,ProductsInMemoryRepository>();
             services.AddSingleton<IBillRepository, BillInMemoryRepository>(); //Dimitar Chervenkov
 
             services.AddSingleton<ITagService, TagService>();
-
+            services.AddSingleton<IBillService, BillService>();
+            services.AddSingleton<IProductsService, ProductsService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
