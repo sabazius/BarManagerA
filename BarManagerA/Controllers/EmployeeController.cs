@@ -1,17 +1,82 @@
-using System.Runtime.InteropServices;
+using BarManagerA.DL.Interfaces;
+using BarManagerA.Models.DTO;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
-// In SDK-style projects such as this one, several assembly attributes that were historically
-// defined in this file are now automatically added during build and populated with
-// values defined in project properties. For details of which attributes are included
-// and how to customise this process see: https://aka.ms/assembly-info-properties
+namespace BarManagerA.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class EmployeeController : ControllerBase
+    {
+        private readonly ILogger<EmployeeController> _logger;
+        private readonly IEmployeeRepository _employeeRepository;
+
+        public EmployeeController(ILogger<EmployeeController> logger, IEmployeeRepository employeeRepository)
+        {
+            _logger = logger;
+            _employeeRepository = employeeRepository;
+        }
+
+        [HttpGet("getAll")]
+        public IActionResult GetAll()
+        {
+            var result = _employeeRepository.GetAll();
+
+            if (result != null) return Ok(result);
+
+            return NoContent();
+        }
+
+        [HttpGet("getById")]
+        public IActionResult Get(int id)
+        {
+            var result = _employeeRepository.GetById(id);
+
+            if (result != null) return Ok(result);
+
+            return NotFound(result);
+        }
+
+        [HttpPost("Create")]
+        public IActionResult Create([FromBody] Employee employee)
+        {
+            if (employee == null) return BadRequest();
+
+            var result = _employeeRepository.Create(employee);
+
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            if (id <= 0) return BadRequest(id);
+
+            var result = _employeeRepository.Delete(id);
+
+            if (result != null) return Ok(result);
+
+            return NotFound(result);
+        }
+
+        [HttpPost("Update")]
+        public IActionResult Update([FromBody] Employee employee)
+        {
+            if (employee == null) return BadRequest();
+
+            var searchTag = _employeeRepository.GetById(employee.Id);
+
+            if (searchTag == null) return NotFound(employee);
+
+            var result = _employeeRepository.Update(employee);
+
+            if (result != null) return Ok(result);
+
+            return NotFound(result);
+        }
 
 
-// Setting ComVisible to false makes the types in this assembly not visible to COM
-// components.  If you need to access a type in this assembly from COM, set the ComVisible
-// attribute to true on that type.
 
-[assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM.
-
-[assembly: Guid("de26ea1f-97d2-43b7-a1d9-5de89fcba72b")]
+    }
+}

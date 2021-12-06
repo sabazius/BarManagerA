@@ -1,10 +1,18 @@
-﻿using System;
+﻿using BarManagerA.Models.DTO;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BarManagerA.DL.Interfaces
 {
-    class Class1
+    public interface IEmployeeRepository
     {
+        Employee Create(Employee employee);
+
+        Employee Update(Employee employee);
+
+        Employee Delete(int id);
+
+        Employee GetById(int id);
+
+        IEnumerable<Employee> GetAll();
     }
 }
