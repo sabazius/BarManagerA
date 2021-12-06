@@ -1,27 +1,29 @@
-using BarManagerA.DL.Interfaces;
+using System;
+using AutoMapper;
+using BarManagerA.BL.Interfaces;
 using BarManagerA.Models.DTO;
+using BarManagerA.Models.Requests;
+using BarManagerA.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-
 namespace BarManagerA.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class EmployeeController : ControllerBase
     {
-        private readonly ILogger<EmployeeController> _logger;
-        private readonly IEmployeeRepository _employeeRepository;
+        private readonly IEmployeeService _employeeService;
+        private readonly IMapper _mapper;
 
-        public EmployeeController(ILogger<EmployeeController> logger, IEmployeeRepository employeeRepository)
+        public EmployeeController(IEmployeeService employeeService, IMapper mapper)
         {
-            _logger = logger;
-            _employeeRepository = employeeRepository;
+            _employeeService = employeeService;
+            _mapper = mapper;
         }
 
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var result = _employeeRepository.GetAll();
+            var result = _employeeService.GetAll();
 
             if (result != null) return Ok(result);
 
@@ -31,19 +33,21 @@ namespace BarManagerA.Controllers
         [HttpGet("getById")]
         public IActionResult Get(int id)
         {
-            var result = _employeeRepository.GetById(id);
+            var result = _employeeService.GetById(id);
 
-            if (result != null) return Ok(result);
+            if (result == null) return Ok(result);
 
             return NotFound(result);
         }
 
         [HttpPost("Create")]
-        public IActionResult Create([FromBody] Employee employee)
+        public IActionResult Create([FromBody] EmployeeRequest employeeRequest)
         {
-            if (employee == null) return BadRequest();
+            if (employeeRequest == null) return BadRequest();
 
-            var result = _employeeRepository.Create(employee);
+            var employee = _mapper.Map<Employee>(employeeRequest);
+
+            var result = _employeeService.Create(employee);
 
             return Ok(result);
         }
@@ -53,7 +57,7 @@ namespace BarManagerA.Controllers
         {
             if (id <= 0) return BadRequest(id);
 
-            var result = _employeeRepository.Delete(id);
+            var result = _employeeService.Delete(id);
 
             if (result != null) return Ok(result);
 
@@ -65,11 +69,11 @@ namespace BarManagerA.Controllers
         {
             if (employee == null) return BadRequest();
 
-            var searchTag = _employeeRepository.GetById(employee.Id);
+            var searchTag = _employeeService.GetById(employee.Id);
 
             if (searchTag == null) return NotFound(employee);
 
-            var result = _employeeRepository.Update(employee);
+            var result = _employeeService.Update(employee);
 
             if (result != null) return Ok(result);
 
