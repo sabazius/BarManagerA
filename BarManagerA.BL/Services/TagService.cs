@@ -3,6 +3,7 @@ using BarManagerA.BL.Interfaces;
 using BarManagerA.DL.Interfaces;
 using BarManagerA.Models.DTO;
 using System.Collections.Generic;
+using System.Linq;
 using Serilog;
 
 namespace BarManagerA.BL.Services
@@ -20,6 +21,10 @@ namespace BarManagerA.BL.Services
 
         public Tag Create(Tag tag)
         {
+            var index = _tagRepository.GetAll()?.OrderByDescending(x => x.Id).FirstOrDefault()?.Id;
+
+            tag.Id = (int) (index != null ? index + 1 : 1);
+
             return _tagRepository.Create(tag);
         }
 

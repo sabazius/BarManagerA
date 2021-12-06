@@ -16,6 +16,7 @@ using BarManagerA.BL.Services;
 using BarManagerA.DL.Interfaces;
 using BarManagerA.DL.Repositories.InMemoryRepos;
 using BarManagerA.Host.Extensions;
+using FluentValidation.AspNetCore;
 using Serilog;
 using ILogger = Serilog.ILogger;
 
@@ -46,7 +47,11 @@ namespace BarManagerA
             services.AddSingleton<IProductsService, ProductsService>();
             services.AddSingleton<IEmployeeService, EmployeeService>();
 
-            services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BarManagerA", Version = "v1" });

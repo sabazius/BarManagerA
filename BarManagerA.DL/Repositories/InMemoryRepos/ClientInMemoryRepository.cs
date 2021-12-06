@@ -16,7 +16,7 @@ namespace BarManagerA.DL.Repositories.InMemoryRepos
 
         public Client Create(Client client)
         {
-            ClientInMemoryCollection.TagDb.Add(client);
+            ClientInMemoryCollection.ClientDb.Add(client);
 
             return client;
         }
