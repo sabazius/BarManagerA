@@ -44,7 +44,7 @@ namespace BarManagerA.DL.Repositories.InMemoryRepos
         {
             var item = EmployeeInMemoryCollection.EmployeeDb.FirstOrDefault(x => x.Id == employee.Id);
 
-            item.Name = employee.name;
+            item.Name = employee.Name;
 
             return employee;
         }

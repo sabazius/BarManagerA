@@ -10,17 +10,17 @@ namespace BarManagerA.DL.InMemoryDB
             new Employee()
             {
                 Id = 1,
-                name = "TestNameA"
+                Name = "TestNameA"
             },
             new Employee()
             {
                 Id = 2,
-                name = "TestNameB"
+                Name = "TestNameB"
             },
             new Employee()
             {
                 Id = 3,
-                name = "TestNameC"
+                Name = "TestNameC"
             }
         };
     }
