@@ -1,0 +1,18 @@
+﻿using AutoMapper;
+using BarManagerA.Models.DTO;
+using BarManagerA.Models.Requests;
+using BarManagerA.Models.Responses;
+
+namespace BarManagerA.Host.Extensions
+{
+    public class AutoMapping : Profile
+    {
+        public AutoMapping()
+        {
+            CreateMap<Tag, TagResponse>()
+                .ForMember(m => m.SpecialName, tm => tm.MapFrom(x => x.Id + x.Name));
+            CreateMap<TagRequest, Tag>();
+
+        }
+    }
+}

@@ -1,4 +1,5 @@
 ﻿using BarManagerA.Models.DTO;
+using System;
 using System.Collections.Generic;
 
 namespace BarManagerA.DL.InMemoryDB
@@ -10,21 +11,21 @@ namespace BarManagerA.DL.InMemoryDB
             new Client()
             {
                 Id = 1,
-                Name = "TestNameA"
+                Name = "TestNameA",
                 MoneySpend = DateTime.Today,
                 Discount = 1,
             },
             new Client()
             {
                 Id = 2,
-                Name = "TestNameB"
+                Name = "TestNameB",
                 MoneySpend = DateTime.Today,
                 Discount = 2,
             },
             new Client()
             {
                 Id = 3,
-                Name = "TestNameC"
+                Name = "TestNameC",
                 MoneySpend = DateTime.Today,
                 Discount = 3,
             }
