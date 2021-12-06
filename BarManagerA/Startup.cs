@@ -36,6 +36,7 @@ namespace BarManagerA
             services.AddSingleton(Log.Logger);
 
             services.AddSingleton<ITagRepository, TagInMemoryRepository>();
+            services.AddSingleton<IClientRepository, ClientInMemoryRepository>();
             services.AddSingleton<IProductsRepository,ProductsInMemoryRepository>();
             services.AddSingleton<IBillRepository, BillInMemoryRepository>(); //Dimitar Chervenkov
             services.AddSingleton<IEmployeeRepository, EmployeeInMemoryRepository>(); // Simeon Shumanov
