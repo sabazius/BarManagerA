@@ -1,9 +1,11 @@
-﻿using BarManagerA.Models.DTO;
+﻿using System;
+using BarManagerA.Models.DTO;
 using System.Collections.Generic;
+using System.Text;
 
-namespace BarManagerA.DL.Interfaces
+namespace BarManagerA.BL.Interfaces
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeService
     {
         Employee Create(Employee employee);
 

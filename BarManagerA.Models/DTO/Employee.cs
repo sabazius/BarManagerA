@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BarManagerA.Models.DTO
+﻿namespace BarManagerA.Models.DTO
 {
-    class Class1
+    public class Employee
     {
+        public string Name { get; set; }
+
+        public int Id { get; set; }
     }
 }

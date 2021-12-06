@@ -36,12 +36,15 @@ namespace BarManagerA
             services.AddSingleton(Log.Logger);
 
             services.AddSingleton<ITagRepository, TagInMemoryRepository>();
+            services.AddSingleton<IClientRepository, ClientInMemoryRepository>();
             services.AddSingleton<IProductsRepository,ProductsInMemoryRepository>();
             services.AddSingleton<IBillRepository, BillInMemoryRepository>(); //Dimitar Chervenkov
+            services.AddSingleton<IEmployeeRepository, EmployeeInMemoryRepository>(); // Simeon Shumanov
 
             services.AddSingleton<ITagService, TagService>();
             services.AddSingleton<IBillService, BillService>();
             services.AddSingleton<IProductsService, ProductsService>();
+            services.AddSingleton<IEmployeeService, EmployeeService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
