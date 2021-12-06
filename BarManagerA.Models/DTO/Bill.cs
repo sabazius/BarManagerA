@@ -1,11 +1,9 @@
 ﻿using BarManagerA.Models.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BarManagerA.Models.DTO
 {
-   public class Bill
+    public class Bill
     {
         public int ID { get; set; }
         
@@ -16,14 +14,14 @@ namespace BarManagerA.Models.DTO
         public BillStatus BillStatus { get; set; }
         
 
-        public string PaymentType { get; set; }
+        public PaymentType PaymentType { get; set; }
         
 
-        public int Created { get; set; }
-        
+        public DateTime DateTimeCreated { get; set; }
+      
 
-        public int Finished { get; set; }
-        
+        public DateTime DateTimeFinished { get; set; }
+       
 
     }
 }

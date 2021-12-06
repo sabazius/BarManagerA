@@ -11,8 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BarManagerA.BL.Interfaces;
+using BarManagerA.BL.Services;
 using BarManagerA.DL.Interfaces;
 using BarManagerA.DL.Repositories.InMemoryRepos;
+using BarManagerA.Host.Extensions;
+using Serilog;
+using ILogger = Serilog.ILogger;
 
 namespace BarManagerA
 {
@@ -28,8 +33,18 @@ namespace BarManagerA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(Log.Logger);
+
             services.AddSingleton<ITagRepository, TagInMemoryRepository>();
             services.AddSingleton<IClientRepository, ClientInMemoryRepository>();
+            services.AddSingleton<IProductsRepository,ProductsInMemoryRepository>();
+            services.AddSingleton<IBillRepository, BillInMemoryRepository>(); //Dimitar Chervenkov
+            services.AddSingleton<IEmployeeRepository, EmployeeInMemoryRepository>(); // Simeon Shumanov
+
+            services.AddSingleton<ITagService, TagService>();
+            services.AddSingleton<IBillService, BillService>();
+            services.AddSingleton<IProductsService, ProductsService>();
+            services.AddSingleton<IEmployeeService, EmployeeService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -39,7 +54,7 @@ namespace BarManagerA
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger logger)
         {
             if (env.IsDevelopment())
             {
@@ -47,6 +62,8 @@ namespace BarManagerA
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BarManagerA v1"));
             }
+
+            app.ConfigureExceptionHandler(logger);
 
             app.UseHttpsRedirection();
 
