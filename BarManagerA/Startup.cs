@@ -35,6 +35,7 @@ namespace BarManagerA
             services.AddSingleton<IBillRepository, BillInMemoryRepository>(); //Dimitar Chervenkov
 
             services.AddSingleton<ITagService, TagService>();
+            services.AddSingleton<IProductsService, ProductsService>();
 
 
             services.AddControllers();

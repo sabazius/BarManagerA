@@ -44,7 +44,7 @@ namespace BarManagerA.Host.Controllers
         }
 
         [HttpPost("Create")]
-        public IActionResult Create ([FromBody] Products products)
+        public IActionResult Create([FromBody] Products products)
         {
             if (products == null) return BadRequest();
 
@@ -52,5 +52,32 @@ namespace BarManagerA.Host.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("Delete")]
+        public IActionResult Delete(int id)
+        {
+            if (id <= 0) return BadRequest();
+
+            var result = _productsService.GetById(id);
+
+            if (result != null) return Ok(result);
+
+            return NotFound(result);
+        }
+
+        [HttpPost("Update")]
+        public IActionResult Update([FromBody] Products products)
+        {
+            {
+                if (products == null) return BadRequest();
+
+                var result = _productsService.Update(products);
+
+                if (result != null) return Ok(result);
+
+                return NotFound(result);
+            }
+        }
     }
 }
+
