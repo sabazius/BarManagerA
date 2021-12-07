@@ -42,7 +42,7 @@ namespace BarManagerA.Host.Controllers
 
             var response = _mapper.Map<BillResponse>(result);
 
-            return NotFound(response);
+            return Ok(response);
         }
 
         [HttpPost("Create")]
