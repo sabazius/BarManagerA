@@ -1,5 +1,8 @@
-﻿using BarManagerA.BL.Interfaces;
+﻿using AutoMapper;
+using BarManagerA.BL.Interfaces;
 using BarManagerA.Models.DTO;
+using BarManagerA.Models.Requests;
+using BarManagerA.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -11,11 +14,13 @@ namespace BarManagerA.Host.Controllers
     {
         private readonly ILogger<BillController> _logger;
         private readonly IBillService _billService;
+        private readonly IMapper _mapper;
 
-        public BillController(ILogger<BillController> logger, IBillService billService)
+        public BillController(ILogger<BillController> logger, IBillService billService, IMapper mapper)
         {
             _logger = logger;
             _billService = billService;
+            _mapper = mapper;
         }
 
         [HttpGet("getAll")]
@@ -33,17 +38,21 @@ namespace BarManagerA.Host.Controllers
         {
             var result = _billService.GetById(id);
 
-            if (result != null) return Ok(result);
+            if (result == null) return NotFound(id);
+
+            var response = _mapper.Map<BillResponse>(result);
 
             return NotFound(result);
         }
 
         [HttpPost("Create")]
-        public IActionResult Create([FromBody] Bill bill)
+        public IActionResult Create([FromBody] BillRequest billRequest)
         {
-            if (bill == null) return BadRequest();
+            if (billRequest == null) return BadRequest();
 
-            var result = _billService.Create(bill);
+            var tag = _mapper.Map<Bill>(billRequest);
+
+            var result = _billService.Create(tag);
 
             return Ok(result);
         }

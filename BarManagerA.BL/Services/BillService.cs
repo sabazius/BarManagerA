@@ -2,6 +2,7 @@
 using BarManagerA.DL.Interfaces;
 using BarManagerA.Models.DTO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BarManagerA.BL.Services
 {
@@ -16,6 +17,10 @@ namespace BarManagerA.BL.Services
 
         public Bill Create(Bill bill)
         {
+            var index = _billRepository.GetAll()?.OrderByDescending(x => x.ID).FirstOrDefault()?.ID;
+
+            bill.ID = (int)(index != null ? index + 1 : 1);
+
             return _billRepository.Create(bill);
         }
 
