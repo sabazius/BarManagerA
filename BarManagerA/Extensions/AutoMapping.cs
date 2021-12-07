@@ -16,7 +16,8 @@ namespace BarManagerA.Host.Extensions
             CreateMap<Employee, EmployeeResponse>()
                 .ForMember(m => m.Id, tm => tm.MapFrom(x => x.Id + x.Name));
             CreateMap<EmployeeRequest, Employee>();
-
+            CreateMap<Bill, BillResponse>();
+            CreateMap<BillRequest, Bill>();
             CreateMap<Products, ProductsResponse>()
                 .ForMember(m => m.Id, tm => tm.MapFrom(x => x.Id + x.Name));
             CreateMap<ProductsRequest, Products>();
