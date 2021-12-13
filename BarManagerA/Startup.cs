@@ -15,7 +15,9 @@ using BarManagerA.BL.Interfaces;
 using BarManagerA.BL.Services;
 using BarManagerA.DL.Interfaces;
 using BarManagerA.DL.Repositories.InMemoryRepos;
+using BarManagerA.DL.Repositories.MongoRepos;
 using BarManagerA.Host.Extensions;
+using BarManagerA.Models.Configuration;
 using FluentValidation.AspNetCore;
 using Serilog;
 using ILogger = Serilog.ILogger;
@@ -36,11 +38,14 @@ namespace BarManagerA
         {
             services.AddSingleton(Log.Logger);
 
-            services.AddSingleton<ITagRepository, TagInMemoryRepository>();
+            //services.AddSingleton<ITagRepository, TagInMemoryRepository>();
             services.AddSingleton<IClientRepository, ClientInMemoryRepository>();
             services.AddSingleton<IProductsRepository,ProductsInMemoryRepository>();
             services.AddSingleton<IBillRepository, BillInMemoryRepository>(); //Dimitar Chervenkov
             services.AddSingleton<IEmployeeRepository, EmployeeInMemoryRepository>(); // Simeon Shumanov
+
+            services.AddSingleton<ITagRepository, TagMongoRepository > ();
+
 
             services.AddSingleton<ITagService, TagService>();
             services.AddSingleton<IBillService, BillService>();
@@ -48,6 +53,8 @@ namespace BarManagerA
             services.AddSingleton<IEmployeeService, EmployeeService>();
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.Configure<MongoDbConfiguration>(Configuration.GetSection(nameof(MongoDbConfiguration)));
 
             services.AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());

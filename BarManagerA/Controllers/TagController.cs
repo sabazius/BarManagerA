@@ -62,11 +62,9 @@ namespace BarManagerA.Host.Controllers
         {
             if (id <= 0) return BadRequest(id);
 
-            var result = _tagService.Delete(id);
+            _tagService.Delete(id);
 
-            if (result != null) return Ok(result);
-
-            return NotFound(result);
+            return Ok();
         }
 
         [HttpPost("Update")]

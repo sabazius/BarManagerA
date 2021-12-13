@@ -33,9 +33,9 @@ namespace BarManagerA.BL.Services
             return _tagRepository.Update(tag);
         }
 
-        public Tag Delete(int id)
+        public void Delete(int id)
         {
-            return _tagRepository.Delete(id);
+            _tagRepository.Delete(id);
         }
 
         public Tag GetById(int id)
