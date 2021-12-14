@@ -37,11 +37,10 @@ namespace BarManagerA
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(Log.Logger);
-
-            //services.AddSingleton<ITagRepository, TagInMemoryRepository>();
+                       
             services.AddSingleton<IClientRepository, ClientInMemoryRepository>();
-            services.AddSingleton<IProductsRepository,ProductsInMemoryRepository>();
             services.AddSingleton<IBillRepository, BillMongoRepository>(); //Dimitar Chervenkov
+            services.AddSingleton<IProductsRepository,ProductsMongoRepository>(); // Konstantin Kostov
             services.AddSingleton<IEmployeeRepository, EmployeeInMemoryRepository>(); // Simeon Shumanov
 
             services.AddSingleton<ITagRepository, TagMongoRepository > ();
@@ -64,6 +63,8 @@ namespace BarManagerA
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BarManagerA", Version = "v1" });
             });
+
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +88,7 @@ namespace BarManagerA
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }
