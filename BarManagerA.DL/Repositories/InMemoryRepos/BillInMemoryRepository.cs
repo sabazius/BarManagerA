@@ -23,7 +23,7 @@ namespace BarManagerA.DL.Repositories.InMemoryRepos
 
         public Bill Delete(int id)
         {
-            var bill = BillInMemoryCollection.BillDb.FirstOrDefault(x => x.ID == id);
+            var bill = BillInMemoryCollection.BillDb.FirstOrDefault(x => x.Id == id);
 
             if (bill != null) BillInMemoryCollection.BillDb.Remove(bill);
 
@@ -37,12 +37,12 @@ namespace BarManagerA.DL.Repositories.InMemoryRepos
 
         public Bill GetById(int id)
         {
-            return BillInMemoryCollection.BillDb.FirstOrDefault(x => x.ID == id);
+            return BillInMemoryCollection.BillDb.FirstOrDefault(x => x.Id == id);
         }
 
         public Bill Update(Bill bill)
         {
-            var item = BillInMemoryCollection.BillDb.FirstOrDefault(x => x.ID == bill.ID);
+            var item = BillInMemoryCollection.BillDb.FirstOrDefault(x => x.Id == bill.Id);
 
             item.Amount = bill.Amount;
             item.BillStatus = bill.BillStatus;

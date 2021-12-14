@@ -15,7 +15,7 @@ namespace BarManagerA.DL.InMemoryDB
                     BillStatus = BillStatus.Paid,
                     DateTimeCreated = DateTime.Now,
                     DateTimeFinished = DateTime.Now,
-                    ID = 749,
+                    Id = 749,
                     PaymentType = PaymentType.CreditCard
             },
             new Bill()
@@ -24,7 +24,7 @@ namespace BarManagerA.DL.InMemoryDB
                     BillStatus = BillStatus.Paid,
                     DateTimeCreated = DateTime.Now,
                     DateTimeFinished = DateTime.Now,
-                    ID = 748,
+                    Id = 748,
                     PaymentType = PaymentType.Cash
             },
             new Bill()
@@ -33,7 +33,7 @@ namespace BarManagerA.DL.InMemoryDB
                     BillStatus = BillStatus.Paid,
                     DateTimeCreated = DateTime.Now,
                     DateTimeFinished = DateTime.Now,
-                    ID = 999,
+                    Id = 999,
                     PaymentType = PaymentType.CreditCard
             }
         };

@@ -5,7 +5,7 @@ namespace BarManagerA.Models.DTO
 {
     public class Bill
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         
 
         public double Amount{ get; set; }
