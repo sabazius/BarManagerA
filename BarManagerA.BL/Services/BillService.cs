@@ -17,9 +17,9 @@ namespace BarManagerA.BL.Services
 
         public Bill Create(Bill bill)
         {
-            var index = _billRepository.GetAll()?.OrderByDescending(x => x.ID).FirstOrDefault()?.ID;
+            var index = _billRepository.GetAll()?.OrderByDescending(x => x.Id).FirstOrDefault()?.Id;
 
-            bill.ID = (int)(index != null ? index + 1 : 1);
+            bill.Id = (int)(index != null ? index + 1 : 1);
 
             return _billRepository.Create(bill);
         }

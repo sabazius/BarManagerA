@@ -74,7 +74,7 @@ namespace BarManagerA.Host.Controllers
         {
             if (bill == null) return BadRequest();
 
-            var searchBill = _billService.GetById(bill.ID);
+            var searchBill = _billService.GetById(bill.Id);
 
             if (searchBill == null) return NotFound(bill);
 

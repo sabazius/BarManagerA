@@ -41,7 +41,7 @@ namespace BarManagerA
             //services.AddSingleton<ITagRepository, TagInMemoryRepository>();
             services.AddSingleton<IClientRepository, ClientInMemoryRepository>();
             services.AddSingleton<IProductsRepository,ProductsInMemoryRepository>();
-            services.AddSingleton<IBillRepository, BillInMemoryRepository>(); //Dimitar Chervenkov
+            services.AddSingleton<IBillRepository, BillMongoRepository>(); //Dimitar Chervenkov
             services.AddSingleton<IEmployeeRepository, EmployeeInMemoryRepository>(); // Simeon Shumanov
 
             services.AddSingleton<ITagRepository, TagMongoRepository > ();

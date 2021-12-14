@@ -65,9 +65,7 @@ namespace BarManagerA.Host.Controllers
         {
             if (id <= 0) return BadRequest();
 
-            var result = _productsService.GetById(id);
-
-            var result = _productsService.Delete(id);
+           var result = _productsService.Delete(id);
 
             if (result != null) return Ok(result);
 
