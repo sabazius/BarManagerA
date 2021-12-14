@@ -59,10 +59,13 @@ namespace BarManagerA.Host.Controllers
 
             return Ok(result);
         }
-        [HttpDelete]
+
+        [HttpPost("Delete")]
         public IActionResult Delete(int id)
         {
-            if (id <= 0) return BadRequest(id);
+            if (id <= 0) return BadRequest();
+
+            var result = _productsService.GetById(id);
 
             var result = _productsService.Delete(id);
 
@@ -88,3 +91,4 @@ namespace BarManagerA.Host.Controllers
         }
     }
 }
+

@@ -43,6 +43,7 @@ namespace BarManagerA
             services.AddSingleton<IEmployeeRepository, EmployeeInMemoryRepository>(); // Simeon Shumanov
 
             services.AddSingleton<ITagService, TagService>();
+            services.AddSingleton<IProductsService, ProductsService>();
             services.AddSingleton<IBillService, BillService>();
             services.AddSingleton<IProductsService, ProductsService>();
             services.AddSingleton<IEmployeeService, EmployeeService>();
