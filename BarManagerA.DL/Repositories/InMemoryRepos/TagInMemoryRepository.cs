@@ -21,13 +21,11 @@ namespace BarManagerA.DL.Repositories.InMemoryRepos
             return tag;
         }
 
-        public Tag Delete(int id)
+        public void Delete(int id)
         {
             var tag = TagInMemoryCollection.TagDb.FirstOrDefault(x => x.Id == id);
 
             if (tag != null) TagInMemoryCollection.TagDb.Remove(tag);
-
-            return tag;
         }
 
         public IEnumerable<Tag> GetAll()

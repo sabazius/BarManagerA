@@ -9,7 +9,7 @@ namespace BarManagerA.DL.Interfaces
 
         Tag Update(Tag tag);
 
-        Tag Delete(int id);
+        void Delete(int id);
 
         Tag GetById(int id);
 

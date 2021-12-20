@@ -6,6 +6,8 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BarManagerA.DL.Repositories.MongoRepos
 {
@@ -45,6 +47,9 @@ namespace BarManagerA.DL.Repositories.MongoRepos
         
             _productsCollection.Find(products => products.Id == id).FirstOrDefault();
         
+            return _productsCollection.Find(products => true).ToList();
+        }
+
         public Products Update(Products products)
         {
             _productsCollection.ReplaceOne(productsToReplace => productsToReplace.Id == products.Id, products);

@@ -15,7 +15,9 @@ using BarManagerA.BL.Interfaces;
 using BarManagerA.BL.Services;
 using BarManagerA.DL.Interfaces;
 using BarManagerA.DL.Repositories.InMemoryRepos;
+using BarManagerA.DL.Repositories.MongoRepos;
 using BarManagerA.Host.Extensions;
+using BarManagerA.Models.Configuration;
 using FluentValidation.AspNetCore;
 using Serilog;
 using ILogger = Serilog.ILogger;
@@ -35,19 +37,24 @@ namespace BarManagerA
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(Log.Logger);
-
-            services.AddSingleton<ITagRepository, TagInMemoryRepository>();
+                       
             services.AddSingleton<IClientRepository, ClientInMemoryRepository>();
-            services.AddSingleton<IProductsRepository,ProductsInMemoryRepository>();
-            services.AddSingleton<IBillRepository, BillInMemoryRepository>(); //Dimitar Chervenkov
+            services.AddSingleton<IBillRepository, BillMongoRepository>(); //Dimitar Chervenkov
+            services.AddSingleton<IProductsRepository,ProductsMongoRepository>(); // Konstantin Kostov
             services.AddSingleton<IEmployeeRepository, EmployeeInMemoryRepository>(); // Simeon Shumanov
 
+            services.AddSingleton<ITagRepository, TagMongoRepository > ();
+
+
             services.AddSingleton<ITagService, TagService>();
+            services.AddSingleton<IProductsService, ProductsService>();
             services.AddSingleton<IBillService, BillService>();
             services.AddSingleton<IProductsService, ProductsService>();
             services.AddSingleton<IEmployeeService, EmployeeService>();
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.Configure<MongoDbConfiguration>(Configuration.GetSection(nameof(MongoDbConfiguration)));
 
             services.AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
@@ -56,6 +63,8 @@ namespace BarManagerA
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BarManagerA", Version = "v1" });
             });
+
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +88,7 @@ namespace BarManagerA
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

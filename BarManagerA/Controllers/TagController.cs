@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using BarManagerA.BL.Interfaces;
 using BarManagerA.Models.DTO;
@@ -26,7 +27,9 @@ namespace BarManagerA.Host.Controllers
         {
             var result = _tagService.GetAll();
 
-            if (result != null) return Ok(result);
+            var response = _mapper.Map<IEnumerable<TagResponse>>(result);
+
+            if (response != null) return Ok(response);
 
             return NoContent();
         }
@@ -62,11 +65,9 @@ namespace BarManagerA.Host.Controllers
         {
             if (id <= 0) return BadRequest(id);
 
-            var result = _tagService.Delete(id);
+            _tagService.Delete(id);
 
-            if (result != null) return Ok(result);
-
-            return NotFound(result);
+            return Ok();
         }
 
         [HttpPost("Update")]
@@ -80,9 +81,12 @@ namespace BarManagerA.Host.Controllers
 
             var result = _tagService.Update(tag);
 
-            if (result != null) return Ok(result);
 
-            return NotFound(result);
+            var response = _mapper.Map<TagResponse>(result);
+
+            if (response != null) return Ok(response);
+
+            return NotFound(tag);
         }
 
 
