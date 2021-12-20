@@ -40,12 +40,15 @@ namespace BarManagerA.DL.Repositories.MongoRepos
 
         public IEnumerable<Products> GetAll()
         {
-            return _productsCollection.Find(products => true).ToList();
+           return _productsCollection.Find(products => true).ToList();
         }
 
         public Products GetById(int id) =>
-
+        
             _productsCollection.Find(products => products.Id == id).FirstOrDefault();
+        
+            return _productsCollection.Find(products => true).ToList();
+        }
 
         public Products Update(Products products)
         {
