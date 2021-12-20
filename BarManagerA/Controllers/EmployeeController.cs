@@ -35,7 +35,7 @@ namespace BarManagerA.Controllers
         {
             var result = _employeeService.GetById(id);
 
-            if (result == null) return Ok(result);
+            if (result != null) return Ok(result);
 
             return NotFound(result);
         }
