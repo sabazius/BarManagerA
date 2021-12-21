@@ -55,7 +55,7 @@ namespace BarManagerA.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            if (id <= 0) return BadRequest(id);
+            if (id < 0) return BadRequest(id);
 
             var result = _employeeService.Delete(id);
 

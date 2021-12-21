@@ -18,8 +18,9 @@ namespace BarManagerA.Host.Extensions
             //CreateMap<IEnumerable<Tag>, IEnumerable<TagResponse>>().ReverseMap();
 
             CreateMap<Employee, EmployeeResponse>()
-                .ForMember(m => m.Id, tm => tm.MapFrom(x => x.Id + x.Name));
-            CreateMap<EmployeeRequest, Employee>();
+                .ForMember(m => m.Id, tm => tm.MapFrom(x => x.Id + x.Name))
+                .ReverseMap();
+            CreateMap<EmployeeRequest, Employee>().ReverseMap();
             CreateMap<Bill, BillResponse>();
             CreateMap<BillRequest, Bill>();
             CreateMap<Products, ProductsResponse>()
