@@ -40,7 +40,12 @@ namespace BarManagerA.DL.Repositories.InMemoryRepos
         public Products GetById(int id)
         {
             return ProductsInMemoryCollection.ProductsDB.FirstOrDefault(x => x.Id == id);
-        }   
+        }
+
+        public void GetById(object id)
+        {
+            throw new NotImplementedException();
+        }
 
         public Products Update(Products products)
         {

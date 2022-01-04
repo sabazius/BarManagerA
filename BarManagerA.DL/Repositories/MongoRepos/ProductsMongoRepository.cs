@@ -45,7 +45,11 @@ namespace BarManagerA.DL.Repositories.MongoRepos
 
         public Products GetById(int id) =>
             _productsCollection.Find(products => products.Id == id).FirstOrDefault();
-        
+
+        public void GetById(object id)
+        {
+            throw new NotImplementedException();
+        }
 
         public Products Update(Products products)
         {

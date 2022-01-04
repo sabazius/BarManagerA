@@ -1,6 +1,7 @@
 ﻿using BarManagerA.BL.Interfaces;
 using BarManagerA.DL.Interfaces;
 using BarManagerA.Models.DTO;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace BarManagerA.BL.Services
     public class ProductsService : IProductsService
     {
         private readonly IProductsRepository _productsRepository;
-
-        public ProductsService(IProductsRepository productsRepository)
+        private readonly ILogger _logger;
+       
+        public ProductsService(IProductsRepository productsRepository,ILogger logger)
         {
             _productsRepository = productsRepository;
+            _logger = logger;
         }
 
         Products IProductsService.Create(Products products)
@@ -43,6 +46,7 @@ namespace BarManagerA.BL.Services
 
         Products IProductsService.Update(Products products)
         {
+            _logger.Information("Products GetAll");
             return _productsRepository.Update(products);
         }
     }

@@ -6,6 +6,7 @@ using BarManagerA.Models.Requests;
 using BarManagerA.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 
 namespace BarManagerA.Host.Controllers
@@ -42,9 +43,7 @@ namespace BarManagerA.Host.Controllers
 
             if (result != null) return Ok(result);
 
-            var response = _mapper.Map<ProductsResponse>(result);
-
-            return Ok(response);
+            return NotFound(result);
 
         }
 
@@ -87,6 +86,7 @@ namespace BarManagerA.Host.Controllers
 
             return NotFound(result);
         }
+
     }
 }
 

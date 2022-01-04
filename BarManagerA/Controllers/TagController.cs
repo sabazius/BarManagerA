@@ -15,11 +15,19 @@ namespace BarManagerA.Host.Controllers
     {
         private readonly ITagService _tagService;
         private readonly IMapper _mapper;
+        private IProductsService productsService;
+        private IMapper mapper;
 
         public TagController(ITagService tagService, IMapper mapper)
         {
             _tagService = tagService;
             _mapper = mapper;
+        }
+
+        public TagController(IProductsService productsService, IMapper mapper)
+        {
+            this.productsService = productsService;
+            this.mapper = mapper;
         }
 
         [HttpGet("getAll")]
