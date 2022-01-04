@@ -70,7 +70,7 @@ namespace BarManagerA.Test
             var okObjectResult = result as OkObjectResult;
             Assert.NotNull(okObjectResult);
 
-            var positions = okObjectResult.Value as IEnumerable<BillResponse>;
+            var positions = okObjectResult.Value as IEnumerable<Bill>;
             Assert.NotNull(positions);
             Assert.Equal(expectedCount, positions.Count());
         }
@@ -137,7 +137,7 @@ namespace BarManagerA.Test
             var okObjectResult = result as OkObjectResult;
             Assert.NotNull(okObjectResult);
 
-            var pos = okObjectResult.Value as BillResponse;
+            var pos = okObjectResult.Value as Bill;
             Assert.NotNull(pos);
             Assert.Equal(expectedBillAmount, pos.Amount);
         }
@@ -151,16 +151,18 @@ namespace BarManagerA.Test
             var bill = Bills.FirstOrDefault(x => x.Id == billId);
 
 
-            _billRepository.Setup(x => x.Delete(billId)).Callback(() => Bills.Remove(bill));
+            _billRepository.Setup(x => x.Delete(billId)).Callback(() => Bills.Remove(bill)).Returns(bill);
 
             //Act
             var result = _controller.Delete(billId);
 
             //Assert
-            var okObjectResult = result as StatusCodeResult;
+            var okObjectResult = result as OkObjectResult;
             Assert.Equal(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
 
             Assert.Null(Bills.FirstOrDefault(x => x.Id == billId));
+
+
         }
 
         [Fact]
