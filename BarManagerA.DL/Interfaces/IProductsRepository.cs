@@ -16,6 +16,6 @@ namespace BarManagerA.DL.Interfaces
         Products GetById(int id);
 
         IEnumerable<Products> GetAll();
-
+        void GetById(object id);
     }
 }
