@@ -118,7 +118,7 @@ namespace BarManagerA.Test
         }
 
         [Fact]
-        public void Employee_Update_TagName()
+        public void Employee_Update_EmployeeName()
         {
             //setup
             var employeeId = 1;
@@ -144,7 +144,7 @@ namespace BarManagerA.Test
         }
 
         [Fact]
-        public void Tag_Delete_Existing_PositionName()
+        public void Employee_Delete_Existing_PositionName()
         {
             //setup
             var employeeId = 1;
