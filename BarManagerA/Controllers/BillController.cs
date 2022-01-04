@@ -4,7 +4,7 @@ using BarManagerA.Models.DTO;
 using BarManagerA.Models.Requests;
 using BarManagerA.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace BarManagerA.Host.Controllers
 {
@@ -12,11 +12,11 @@ namespace BarManagerA.Host.Controllers
     [Route("[controller]")]
     public class BillController : ControllerBase
     {
-        private readonly ILogger<BillController> _logger;
+        private readonly ILogger _logger;
         private readonly IBillService _billService;
         private readonly IMapper _mapper;
 
-        public BillController(ILogger<BillController> logger, IBillService billService, IMapper mapper)
+        public BillController(ILogger logger, IBillService billService, IMapper mapper)
         {
             _logger = logger;
             _billService = billService;

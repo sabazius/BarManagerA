@@ -22,7 +22,7 @@ namespace BarManagerA.Host.Extensions
                 .ReverseMap();
             CreateMap<EmployeeRequest, Employee>().ReverseMap();
             CreateMap<Bill, BillResponse>();
-            CreateMap<BillRequest, Bill>();
+            CreateMap<BillRequest, Bill>().ReverseMap(); 
             CreateMap<Products, ProductsResponse>()
                 .ForMember(m => m.Id, tm => tm.MapFrom(x => x.Id + x.Name));
             CreateMap<ProductsRequest, Products>();
