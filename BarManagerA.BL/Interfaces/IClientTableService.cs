@@ -11,7 +11,7 @@ namespace BarManagerA.BL.Interfaces
 
         ClientTable Delete(int id);
 
-        ClientTable GetById(int id);
+        ClientTable GetByID(int id);
 
         IEnumerable<ClientTable> GetAll();
     }
