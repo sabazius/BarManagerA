@@ -52,7 +52,8 @@ namespace BarManagerA
             services.AddSingleton<IBillService, BillService>();
             services.AddSingleton<IProductsService, ProductsService>();
             services.AddSingleton<IEmployeeService, EmployeeService>();
-
+            services.AddSingleton<IClientTableService, ClientTableService>();
+            
             services.AddAutoMapper(typeof(Startup));
 
             services.Configure<MongoDbConfiguration>(Configuration.GetSection(nameof(MongoDbConfiguration)));

@@ -1,4 +1,4 @@
-﻿using BarManagerA.DL.Interfaces;
+﻿using BarManagerA.BL.Interfaces;
 using BarManagerA.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,17 +8,17 @@ namespace BarManagerA.Host.Controllers
     [Route("[controller]")]
     public class ClientTableController : ControllerBase
     {
-        private readonly IClientTableRepository _clientTableRepository;
+        private readonly IClientTableService _clientTableService;
 
-        public ClientTableController(IClientTableRepository clientTableRepository)
+        public ClientTableController(IClientTableService clientTableService)
         {
-            _clientTableRepository = clientTableRepository;
+            _clientTableService = clientTableService;
         }
 
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
-           var result = _clientTableRepository.GetAll();
+           var result = _clientTableService.GetAll();
 
             return Ok(result);
             
@@ -28,7 +28,7 @@ namespace BarManagerA.Host.Controllers
         {
             if (ID <= 0) return BadRequest();
 
-            var result = _clientTableRepository.GetByID(ID);
+            var result = _clientTableService.GetByID(ID);
 
             if (result == null) return NotFound();
 
@@ -39,7 +39,7 @@ namespace BarManagerA.Host.Controllers
         {
             if (clienttable == null) return BadRequest();
 
-            var result = _clientTableRepository.Create(clienttable);
+            var result = _clientTableService.Create(clienttable);
 
             return Ok(clienttable);
         }
@@ -49,7 +49,7 @@ namespace BarManagerA.Host.Controllers
         {
             if (id <= 0) return BadRequest(id);
 
-            var result = _clientTableRepository.Delete(id);
+            var result = _clientTableService.Delete(id);
 
             if (result != null) return Ok(result);
 
@@ -61,11 +61,11 @@ namespace BarManagerA.Host.Controllers
         {
             if (clienttable == null) return BadRequest();
 
-            var searchClienttable= _clientTableRepository.GetByID(clienttable.ID);
+            var searchClienttable= _clientTableService.GetByID(clienttable.ID);
 
             if (searchClienttable == null) return NotFound(clienttable.ID);
 
-            var result = _clientTableRepository.Update(clienttable);
+            var result = _clientTableService.Update(clienttable);
 
             return Ok(result);
         }
