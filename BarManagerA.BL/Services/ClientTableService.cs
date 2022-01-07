@@ -1,6 +1,7 @@
 ﻿using BarManagerA.BL.Interfaces;
 using BarManagerA.DL.Interfaces;
 using BarManagerA.Models.DTO;
+using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,10 +10,12 @@ namespace BarManagerA.BL.Services
     public class ClientTableService : IClientTableService
     {
         private readonly IClientTableRepository _clienttableRepository;
+        private readonly ILogger _logger;
 
-        public ClientTableService(IClientTableRepository clienttableRepository)
+        public ClientTableService(IClientTableRepository clienttableRepository, ILogger logger)
         {
             _clienttableRepository = clienttableRepository;
+            _logger = logger;
         }
 
         public ClientTable Create(ClientTable clienttableRepository)
@@ -41,6 +44,9 @@ namespace BarManagerA.BL.Services
 
         public IEnumerable<ClientTable> GetAll()
         {
+
+            _logger.Information("Tag GetAll");
+
             return _clienttableRepository.GetAll();
         }
     }
