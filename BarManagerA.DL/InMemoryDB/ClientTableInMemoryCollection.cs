@@ -10,63 +10,66 @@ namespace BarManagerA.DL.InMemoryDB
             new ClientTable()
             {
                 ID =1,
-                Seats = 2
-                //Location = 
-                //Orders = new List<Orders>
-                //{
-                //    new Orders()
-                //    {
-                //        Id = 1
-                //    }
-                //}
-                //Furniture = new List<Furniture>
-                //{
-                //    new Furniture()
-                //    {
-                //        Id = 1,
-                //    }
-                //}
-                
+                Seats = 2,
+                Location = new List<Location>
+                 {
+                    new Location()
+                    {
+                        Id = 1,
+                        Name = "A"
+                    }
+                },
+                Orders = new List<int>
+                {
+                    1
+                },
+                Furniture = new List<int>
+                {
+                   2
+                }
+
             },
             new ClientTable()
             {
                 ID = 2,
-                Seats = 4
-                //Location = 
-                //Orders = new List<Orders>
-                //{
-                //    new Orders()
-                //    {
-                //        Id = 1
-                //    }
-                //}
-                //Furniture = new List<Furniture>
-                //{
-                //    new Furniture()
-                //    {
-                //        Id = 1,
-                //    }
-                //}
+                Seats = 4,
+                Location = new List<Location>
+                 {
+                    new Location()
+                    {
+                        Id = 1,
+                        Name = "B"
+                    }
+                },
+                Orders = new List<int>
+                {
+                  5
+                },
+                Furniture = new List<int>
+                {
+                   6
+                }
             },
             new ClientTable()
             {
                 ID = 3,
-                Seats = 5
-                //Location = 
-                //Orders = new List<Orders>
-                //{
-                //    new Orders()
-                //    {
-                //        Id = 1
-                //    }
-                //}
-                //Furniture = new List<Furniture>
-                //{
-                //    new Furniture()
-                //    {
-                //        Id = 1,
-                //    }
-                //}
+                Seats = 5,
+                Location = new List<Location>
+                 {
+                    new Location()
+                    {
+                        Id = 1,
+                        Name = "C"
+                    }
+                },
+                Orders = new List<int>
+                {
+                  3
+                },
+                Furniture = new List<int>
+                {
+                  7
+                }
             }
         };
     }
