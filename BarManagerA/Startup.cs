@@ -42,7 +42,7 @@ namespace BarManagerA
             services.AddSingleton<IBillRepository, BillMongoRepository>(); //Dimitar Chervenkov
             services.AddSingleton<IProductsRepository,ProductsMongoRepository>(); // Konstantin Kostov
             services.AddSingleton<IEmployeeRepository, EmployeeMongoRepository>(); // Simeon Shumanov
-            services.AddSingleton<IClientTableRepository, ClientTableInMemoryRepository>(); //Denitsa Angelieva
+            services.AddSingleton<IClientTableRepository, ClientTableMongoRepository>(); //Denitsa Angelieva
 
             services.AddSingleton<ITagRepository, TagMongoRepository > ();
 
