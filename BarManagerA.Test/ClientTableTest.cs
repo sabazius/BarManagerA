@@ -138,7 +138,7 @@ namespace BarManagerA.Test
 
             var pos = okObjectResult.Value as ClientTableResponse;
             Assert.NotNull(pos);
-            Assert.Equal(expectedClientTableSeat, pos.Seat);
+            Assert.Equal(expectedClientTableSeat, pos.Seats);
         }
 
         [Fact]

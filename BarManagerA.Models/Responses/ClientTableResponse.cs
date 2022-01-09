@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BarManagerA.Models.Responses
 {
-    class ClientTableResponse
+   public class ClientTableResponse
     {
         public int ID { get; set; }
         public int Seats { get; set; }
