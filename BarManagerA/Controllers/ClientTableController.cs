@@ -1,4 +1,5 @@
-﻿using BarManagerA.BL.Interfaces;
+﻿using AutoMapper;
+using BarManagerA.BL.Interfaces;
 using BarManagerA.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,12 @@ namespace BarManagerA.Host.Controllers
     public class ClientTableController : ControllerBase
     {
         private readonly IClientTableService _clientTableService;
+        private readonly IMapper _mapper;
 
-        public ClientTableController(IClientTableService clientTableService)
+        public ClientTableController(IClientTableService clientTableService, IMapper mapper )
         {
             _clientTableService = clientTableService;
+            _mapper = mapper;
         }
 
         [HttpGet("GetAll")]
@@ -41,7 +44,7 @@ namespace BarManagerA.Host.Controllers
 
             var result = _clientTableService.Create(clienttable);
 
-            return Ok(clienttable);
+            return Ok(result);
         }
 
         [HttpDelete]
