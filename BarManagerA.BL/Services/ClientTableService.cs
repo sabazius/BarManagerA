@@ -20,9 +20,9 @@ namespace BarManagerA.BL.Services
 
         public ClientTable Create(ClientTable clienttableRepository)
         {
-            var index = _clienttableRepository.GetAll()?.OrderByDescending(x => x.ID).FirstOrDefault()?.ID;
+            var index = _clienttableRepository.GetAll()?.OrderByDescending(x => x.Id).FirstOrDefault()?.Id;
 
-            clienttableRepository.ID = (int)(index != null ? index + 1 : 1);
+            clienttableRepository.Id = (int)(index != null ? index + 1 : 1);
 
             return _clienttableRepository.Create( clienttableRepository);
         }

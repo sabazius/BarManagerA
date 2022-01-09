@@ -30,7 +30,7 @@ namespace BarManagerA.Host.Extensions
             CreateMap<ProductsRequest, Products>();
 
             CreateMap<ClientTable, ClientTableResponse>()
-             .ForMember(m => m.ID, tm => tm.MapFrom(x => x.ID + x.Seats));
+             .ForMember(m => m.Id, tm => tm.MapFrom(x => x.Id + x.Seats));
             CreateMap<ClientTableRequest, ClientTable>();
         }
     }

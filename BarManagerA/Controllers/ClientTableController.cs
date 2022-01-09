@@ -51,9 +51,9 @@ namespace BarManagerA.Host.Controllers
         {
             if (clienttable == null) return BadRequest();
 
-            var tag = _mapper.Map<ClientTable>(clienttable);
+            var clientt = _mapper.Map<ClientTable>(clienttable);
 
-            var result = _clientTableService.Create(tag);
+            var result = _clientTableService.Create(clientt);
 
             return Ok(result);
         }
@@ -73,9 +73,9 @@ namespace BarManagerA.Host.Controllers
         {
             if (clienttable == null) return BadRequest();
 
-            var searchTag = _clientTableService.GetByID(clienttable.ID);
+            var searchclientt = _clientTableService.GetByID(clienttable.Id);
 
-            if (searchTag == null) return NotFound(clienttable);
+            if (searchclientt == null) return NotFound(clienttable);
 
             var result = _clientTableService.Update(clienttable);
 

@@ -9,9 +9,9 @@ namespace BarManagerA.DL.Interfaces
 
         ClientTable Update(ClientTable clienttable);
 
-        ClientTable Delete(int ID);
+        ClientTable Delete(int Id);
 
-        ClientTable GetByID(int ID);
+        ClientTable GetByID(int Id);
         IEnumerable<ClientTable> GetAll();
 
     }

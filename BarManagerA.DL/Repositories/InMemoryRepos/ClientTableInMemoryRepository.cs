@@ -19,10 +19,10 @@ namespace BarManagerA.DL.Repositories.InMemoryRepos
             return clienttable;
         }
 
-        public ClientTable Delete(int ID)
+        public ClientTable Delete(int Id)
         {
 
-            var clienttable = ClientTableInMemoryCollection.ClientTableDB.FirstOrDefault(clienttable=>clienttable.ID== ID);
+            var clienttable = ClientTableInMemoryCollection.ClientTableDB.FirstOrDefault(clienttable=>clienttable.Id == Id);
 
             if (clienttable != null) ClientTableInMemoryCollection.ClientTableDB.Remove(clienttable);
 
@@ -34,14 +34,14 @@ namespace BarManagerA.DL.Repositories.InMemoryRepos
             return ClientTableInMemoryCollection.ClientTableDB;
         }
 
-        public ClientTable GetByID(int ID)
+        public ClientTable GetByID(int Id)
         {
-            return ClientTableInMemoryCollection.ClientTableDB.FirstOrDefault(x => x.ID == ID);
+            return ClientTableInMemoryCollection.ClientTableDB.FirstOrDefault(x => x.Id == Id);
         }
 
         public ClientTable Update(ClientTable clienttable)
         {
-            var result = ClientTableInMemoryCollection.ClientTableDB.FirstOrDefault(x => x.ID == clienttable.ID);
+            var result = ClientTableInMemoryCollection.ClientTableDB.FirstOrDefault(x => x.Id == clienttable.Id);
             result.Seats = clienttable.Seats;
             return result;
         }

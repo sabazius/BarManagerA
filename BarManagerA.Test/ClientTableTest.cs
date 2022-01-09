@@ -27,8 +27,8 @@ namespace BarManagerA.Test
 
         private IList<ClientTable> ClientTables = new List<ClientTable>()
         {
-            { new ClientTable() { ID = 1, Seats = 35} },
-            { new () { ID = 2, Seats = 10} },
+            { new ClientTable() { Id = 1, Seats = 35} },
+            { new () { Id = 2, Seats = 10} },
         };
 
         public ClientTableTestss()
@@ -82,7 +82,7 @@ namespace BarManagerA.Test
             var expectedSeats = 4;
 
             _clienttableRepository.Setup(x => x.GetByID(ClientTableID))
-                .Returns(ClientTables.FirstOrDefault(x => x.ID == ClientTableID));
+                .Returns(ClientTables.FirstOrDefault(x => x.Id == ClientTableID));
 
             //Act
             var result = _controller.GetById(ClientTableID);
@@ -105,7 +105,7 @@ namespace BarManagerA.Test
             var userPositionID = 3;
 
             _clienttableRepository.Setup(x => x.GetByID(userPositionID))
-                .Returns(ClientTables.FirstOrDefault(x => x.ID == userPositionID));
+                .Returns(ClientTables.FirstOrDefault(x => x.Id == userPositionID));
 
             //Act
             var result = _controller.GetById(userPositionID);
@@ -122,11 +122,11 @@ namespace BarManagerA.Test
             var ClientTableID = 1;
             var expectedClientTableSeat = 19;
 
-            var ClientTable = ClientTables.FirstOrDefault(x => x.ID == ClientTableID);
+            var ClientTable = ClientTables.FirstOrDefault(x => x.Id == ClientTableID);
             ClientTable.Seats = expectedClientTableSeat;
 
-            _clienttableRepository.Setup(x => x.GetByID(ClientTable.ID)).Returns(ClientTables.FirstOrDefault(x => x.ID == ClientTableID));
-            _clienttableRepository.Setup(x => x.Update(ClientTable)).Returns(ClientTables.FirstOrDefault(x => x.ID == ClientTableID));
+            _clienttableRepository.Setup(x => x.GetByID(ClientTable.Id)).Returns(ClientTables.FirstOrDefault(x => x.Id == ClientTableID));
+            _clienttableRepository.Setup(x => x.Update(ClientTable)).Returns(ClientTables.FirstOrDefault(x => x.Id == ClientTableID));
 
 
             //Act
@@ -147,7 +147,7 @@ namespace BarManagerA.Test
             //setup
             var ClientTableID = 1;
 
-            var ClientTable = ClientTables.FirstOrDefault(x => x.ID == ClientTableID);
+            var ClientTable = ClientTables.FirstOrDefault(x => x.Id == ClientTableID);
 
 
             _clienttableRepository.Setup(x => x.Delete(ClientTableID)).Callback(() => ClientTables.Remove(ClientTable));
@@ -159,7 +159,7 @@ namespace BarManagerA.Test
             var okObjectResult = result as StatusCodeResult;
             Assert.Equal(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
 
-            Assert.Null(ClientTables.FirstOrDefault(x => x.ID == ClientTableID));
+            Assert.Null(ClientTables.FirstOrDefault(x => x.Id == ClientTableID));
         }
 
         [Fact]
@@ -168,7 +168,7 @@ namespace BarManagerA.Test
             //setup
             var userPositionID = 3;
 
-            var position = ClientTables.FirstOrDefault(x => x.ID == userPositionID);
+            var position = ClientTables.FirstOrDefault(x => x.Id == userPositionID);
 
 
             _clienttableRepository.Setup(x => x.Delete(userPositionID)).Callback(() => ClientTables.Remove(position));
@@ -177,7 +177,7 @@ namespace BarManagerA.Test
             var result = _controller.Delete(userPositionID);
 
             //Assert
-            Assert.Null(ClientTables.FirstOrDefault(x => x.ID == userPositionID));
+            Assert.Null(ClientTables.FirstOrDefault(x => x.Id == userPositionID));
         }
 
         [Fact]
@@ -186,7 +186,7 @@ namespace BarManagerA.Test
             //setup
             var clientTable = new ClientTable()
             {
-                ID = 3,
+                Id = 3,
                 Seats = 1,
             };
 
@@ -198,7 +198,7 @@ namespace BarManagerA.Test
                 ClientTables.Add(clientTable);
             }).Returns(new ClientTable()
             {
-                ID = 3,
+                Id = 3,
                 Seats = 4,
             });
 
@@ -209,7 +209,7 @@ namespace BarManagerA.Test
             var okObjectResult = result as OkObjectResult;
             Assert.Equal(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
 
-            Assert.NotNull(ClientTables.FirstOrDefault(x => x.ID == clientTable.ID));
+            Assert.NotNull(ClientTables.FirstOrDefault(x => x.Id == clientTable.Id));
         }
 
     }
