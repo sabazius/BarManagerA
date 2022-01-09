@@ -184,7 +184,7 @@ namespace BarManagerA.Test
         public void ClientTable_Create_PositionName()
         {
             //setup
-            var ClientTable = new ClientTable()
+            var clientTable = new ClientTable()
             {
                 ID = 3,
                 Seats = 1,
@@ -195,7 +195,7 @@ namespace BarManagerA.Test
 
             _clienttableRepository.Setup(x => x.Create(It.IsAny<ClientTable>())).Callback(() =>
             {
-                ClientTables.Add(ClientTable);
+                ClientTables.Add(clientTable);
             }).Returns(new ClientTable()
             {
                 ID = 3,
@@ -203,13 +203,13 @@ namespace BarManagerA.Test
             });
 
             //Act
-            var result = _controller.Create(_mapper.Map<ClientTableRequest>(ClientTable));
+            var result = _controller.Create(_mapper.Map<ClientTableRequest>(clientTable));
 
             //Assert
             var okObjectResult = result as OkObjectResult;
             Assert.Equal(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
 
-            Assert.NotNull(ClientTables.FirstOrDefault(x => x.ID == ClientTable.ID));
+            Assert.NotNull(ClientTables.FirstOrDefault(x => x.ID == clientTable.ID));
         }
 
     }
