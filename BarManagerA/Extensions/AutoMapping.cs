@@ -21,11 +21,17 @@ namespace BarManagerA.Host.Extensions
                 .ForMember(m => m.Id, tm => tm.MapFrom(x => x.Id + x.Name))
                 .ReverseMap();
             CreateMap<EmployeeRequest, Employee>().ReverseMap();
+
             CreateMap<Bill, BillResponse>();
             CreateMap<BillRequest, Bill>();
+
             CreateMap<Products, ProductsResponse>()
                 .ForMember(m => m.Id, tm => tm.MapFrom(x => x.Id + x.Name));
             CreateMap<ProductsRequest, Products>();
+
+            CreateMap<ClientTable, ClientTableResponse>()
+             .ForMember(m => m.Id, tm => tm.MapFrom(x => x.Id + x.Seats));
+            CreateMap<ClientTableRequest, ClientTable>();
         }
     }
 }

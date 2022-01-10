@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using BarManagerA.BL.Interfaces;
 using BarManagerA.Models.DTO;
+using BarManagerA.Models.Requests;
+using BarManagerA.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace BarManagerA.Host.Controllers
 {
@@ -23,26 +26,34 @@ namespace BarManagerA.Host.Controllers
         {
            var result = _clientTableService.GetAll();
 
-            return Ok(result);
-            
+            var response = _mapper.Map<IEnumerable<ClientTableResponse>>(result);
+
+            if (response != null) return Ok(response);
+
+            return NoContent();
+
         }
+
         [HttpGet("GetByID")]
         public IActionResult GetById(int ID)
         {
-            if (ID <= 0) return BadRequest();
-
             var result = _clientTableService.GetByID(ID);
 
-            if (result == null) return NotFound();
+            if (result == null) return NotFound(ID);
 
-            return Ok(result);
+            var response = _mapper.Map<ClientTableResponse>(result);
+
+            return Ok(response);
+
         }
         [HttpPost("Create")]
-        public IActionResult Create([FromBody] ClientTable clienttable)
+        public IActionResult Create([FromBody] ClientTableRequest clienttable)
         {
             if (clienttable == null) return BadRequest();
 
-            var result = _clientTableService.Create(clienttable);
+            var clientt = _mapper.Map<ClientTable>(clienttable);
+
+            var result = _clientTableService.Create(clientt);
 
             return Ok(result);
         }
@@ -52,11 +63,9 @@ namespace BarManagerA.Host.Controllers
         {
             if (id <= 0) return BadRequest(id);
 
-            var result = _clientTableService.Delete(id);
+            _clientTableService.Delete(id);
 
-            if (result != null) return Ok(result);
-
-            return NotFound(result);
+            return Ok();
         }
 
         [HttpPost("Update")]
@@ -64,13 +73,18 @@ namespace BarManagerA.Host.Controllers
         {
             if (clienttable == null) return BadRequest();
 
-            var searchClienttable= _clientTableService.GetByID(clienttable.ID);
+            var searchclientt = _clientTableService.GetByID(clienttable.Id);
 
-            if (searchClienttable == null) return NotFound(clienttable.ID);
+            if (searchclientt == null) return NotFound(clienttable);
 
             var result = _clientTableService.Update(clienttable);
 
-            return Ok(result);
+
+            var response = _mapper.Map<ClientTableResponse>(result);
+
+            if (response != null) return Ok(response);
+
+            return NotFound(clienttable);
         }
 
 

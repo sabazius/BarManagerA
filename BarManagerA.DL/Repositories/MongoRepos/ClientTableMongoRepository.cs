@@ -26,12 +26,12 @@ namespace BarManagerA.DL.Repositories.MongoRepos
           
         }
 
-        public ClientTable Delete(int ID)
+        public ClientTable Delete(int Id)
         {
 
-            var clienttable = GetByID(ID);
+            var clienttable = GetByID(Id);
 
-            _clienttableCollection.DeleteOne(clienttable => clienttable.ID == ID);
+            _clienttableCollection.DeleteOne(clienttable => clienttable.Id == Id);
 
             return clienttable;
         }
@@ -41,14 +41,14 @@ namespace BarManagerA.DL.Repositories.MongoRepos
             return _clienttableCollection.Find(clienttable => true).ToList();
         }
 
-        public ClientTable GetByID(int ID) =>
+        public ClientTable GetByID(int Id) =>
         
-            _clienttableCollection.Find(userPosition => userPosition.ID == ID).FirstOrDefault();
+            _clienttableCollection.Find(userPosition => userPosition.Id == Id).FirstOrDefault();
         
 
         public ClientTable Update(ClientTable clienttable)
         {
-            _clienttableCollection.ReplaceOne(clienttableToReplace => clienttableToReplace.ID == clienttable.ID, clienttable);
+            _clienttableCollection.ReplaceOne(clienttableToReplace => clienttableToReplace.Id == clienttable.Id, clienttable);
 
             return clienttable;
         }

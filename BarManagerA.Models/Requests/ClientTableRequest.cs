@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BarManagerA.Models.Requests
 {
-    class ClientTableRequest
+   public class ClientTableRequest
     {
         public int Seats { get; set; }
         public List<Location> Location { get; set; }

@@ -9,7 +9,7 @@ namespace BarManagerA.DL.InMemoryDB
         {
             new ClientTable()
             {
-                ID =1,
+                Id =1,
                 Seats = 2,
                 Location = new List<Location>
                  {
@@ -31,7 +31,7 @@ namespace BarManagerA.DL.InMemoryDB
             },
             new ClientTable()
             {
-                ID = 2,
+                Id = 2,
                 Seats = 4,
                 Location = new List<Location>
                  {
@@ -52,7 +52,7 @@ namespace BarManagerA.DL.InMemoryDB
             },
             new ClientTable()
             {
-                ID = 3,
+                Id = 3,
                 Seats = 5,
                 Location = new List<Location>
                  {
