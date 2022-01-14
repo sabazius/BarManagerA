@@ -71,7 +71,7 @@ namespace BarManagerA.Test
             var okObjectResult = result as OkObjectResult;
             Assert.NotNull(okObjectResult);
 
-            var positions = okObjectResult.Value as IEnumerable<EmployeeResponse>;
+            var positions = okObjectResult.Value as IEnumerable<Employee>;
             Assert.NotNull(positions);
             Assert.Equal(expectedCount, positions.Count());
         }
@@ -93,7 +93,7 @@ namespace BarManagerA.Test
             var okObjectResult = result as OkObjectResult;
             Assert.NotNull(okObjectResult);
 
-            var response = okObjectResult.Value as EmployeeResponse;
+            var response = okObjectResult.Value as Employee;
             var employee = _mapper.Map<Employee>(response);
 
             Assert.NotNull(employee);
@@ -118,7 +118,7 @@ namespace BarManagerA.Test
         }
 
         [Fact]
-        public void Employee_Update_TagName()
+        public void Employee_Update_EmployeeName()
         {
             //setup
             var employeeId = 1;
@@ -138,13 +138,13 @@ namespace BarManagerA.Test
             var okObjectResult = result as OkObjectResult;
             Assert.NotNull(okObjectResult);
 
-            var pos = okObjectResult.Value as EmployeeResponse;
+            var pos = okObjectResult.Value as Employee;
             Assert.NotNull(pos);
             Assert.Equal(expectedEmployeeName, pos.Name);
         }
 
         [Fact]
-        public void Tag_Delete_Existing_PositionName()
+        public void Employee_Delete_Existing_PositionName()
         {
             //setup
             var employeeId = 1;
@@ -152,13 +152,13 @@ namespace BarManagerA.Test
             var employee = Employees.FirstOrDefault(x => x.Id == employeeId);
 
 
-            _employeeRepository.Setup(x => x.Delete(employeeId)).Callback(() => Employees.Remove(employee));
+            _employeeRepository.Setup(x => x.Delete(employeeId)).Callback(() => Employees.Remove(employee)).Returns(employee);
 
             //Act
             var result = _controller.Delete(employeeId);
 
             //Assert
-            var okObjectResult = result as StatusCodeResult;
+            var okObjectResult = result as OkObjectResult;
             Assert.Equal(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
 
             Assert.Null(Employees.FirstOrDefault(x => x.Id == employeeId));
