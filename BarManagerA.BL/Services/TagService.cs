@@ -4,6 +4,7 @@ using BarManagerA.DL.Interfaces;
 using BarManagerA.Models.DTO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Serilog;
 
 namespace BarManagerA.BL.Services
@@ -19,35 +20,37 @@ namespace BarManagerA.BL.Services
             _logger = logger;
         }
 
-        public Tag Create(Tag tag)
+        public async Task<Tag> Create(Tag tag)
         {
-            var index = _tagRepository.GetAll()?.OrderByDescending(x => x.Id).FirstOrDefault()?.Id;
+            var result = await _tagRepository.GetAll();
+                
+            var index = result.OrderByDescending(x => x.Id).FirstOrDefault()?.Id;
 
             tag.Id = (int) (index != null ? index + 1 : 1);
 
-            return _tagRepository.Create(tag);
+            return await _tagRepository.Create(tag);
         }
 
-        public Tag Update(Tag tag)
+        public async Task<Tag> Update(Tag tag)
         {
-            return _tagRepository.Update(tag);
+            return await _tagRepository.Update(tag);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _tagRepository.Delete(id);
+            await _tagRepository.Delete(id);
         }
 
-        public Tag GetById(int id)
+        public Task<Tag> GetById(int id)
         {
             return _tagRepository.GetById(id);
         }
 
-        public IEnumerable<Tag> GetAll()
+        public async Task<IEnumerable<Tag>> GetAll()
         {
             _logger.Information("Tag GetAll");
 
-            return _tagRepository.GetAll();
+            return await _tagRepository.GetAll();
         }
     }
 }

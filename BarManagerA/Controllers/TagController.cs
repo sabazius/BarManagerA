@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using BarManagerA.BL.Interfaces;
 using BarManagerA.Models.DTO;
@@ -23,9 +24,9 @@ namespace BarManagerA.Host.Controllers
         }
 
         [HttpGet("getAll")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _tagService.GetAll();
+            var result = await _tagService.GetAll();
 
             var response = _mapper.Map<IEnumerable<TagResponse>>(result);
 
@@ -35,9 +36,9 @@ namespace BarManagerA.Host.Controllers
         }
 
         [HttpGet("getById")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var result =  _tagService.GetById(id);
+            var result =  await _tagService.GetById(id);
 
             if (result == null) return NotFound(id);
 
@@ -49,37 +50,37 @@ namespace BarManagerA.Host.Controllers
         }
 
         [HttpPost("Create")]
-        public IActionResult Create([FromBody] TagRequest tagRequest)
+        public async Task<IActionResult> Create([FromBody] TagRequest tagRequest)
         {
             if (tagRequest == null) return BadRequest();
 
             var tag = _mapper.Map<Tag>(tagRequest);
 
-            var result = _tagService.Create(tag);
+            var result = await _tagService.Create(tag);
 
             return Ok(result);
         }
 
         [HttpDelete]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id <= 0) return BadRequest(id);
 
-            _tagService.Delete(id);
+            await _tagService.Delete(id);
 
             return Ok();
         }
 
         [HttpPost("Update")]
-        public IActionResult Update([FromBody] Tag tag)
+        public async Task<IActionResult> Update([FromBody] Tag tag)
         {
             if (tag == null) return BadRequest();
 
-            var searchTag = _tagService.GetById(tag.Id);
+            var searchTag = await _tagService.GetById(tag.Id);
 
             if (searchTag == null) return NotFound(tag);
 
-            var result = _tagService.Update(tag);
+            var result = await _tagService.Update(tag);
 
 
             var response = _mapper.Map<TagResponse>(result);
