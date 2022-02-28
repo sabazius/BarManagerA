@@ -3,6 +3,7 @@ using BarManagerA.Models.Configuration;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Bill = BarManagerA.Models.DTO.Bill;
 
 namespace BarManagerA.DL.Repositories.MongoRepos
@@ -20,32 +21,36 @@ namespace BarManagerA.DL.Repositories.MongoRepos
             _billCollection = database.GetCollection<Bill>("Bills");
         }
 
-        public Bill Create(Bill userPosition)
+        public async Task<Bill> Create(Bill userPosition)
         {
-            _billCollection.InsertOne(userPosition);
+            await _billCollection.InsertOneAsync(userPosition);
             return userPosition;
         }
-         
 
-        public Bill Delete(int id)
+
+        public async Task Delete(int id)
         {
             var bill = GetById(id);
-            _billCollection.DeleteOne(bill => bill.Id == id);
+            await _billCollection.DeleteOneAsync(bill => bill.Id == id);
 
-            return bill;
         }
 
-        public IEnumerable<Bill> GetAll()
+        public async Task<IEnumerable<Bill>> GetAll()
         {
-            return _billCollection.Find(bill => true).ToList();
+            var result = await _billCollection.FindAsync(bill => true);
+            return result.ToEnumerable();
         }
 
-        public  Bill GetById(int id) =>
-            _billCollection.Find(userPosition => userPosition.Id == id).FirstOrDefault();
-
-        public Bill Update(Bill bill)
+        public async Task<Bill> GetById(int id)
         {
-            _billCollection.ReplaceOne(billToReplace => billToReplace.Id == bill.Id, bill);
+
+            var result = await _billCollection.FindAsync(userPosition => userPosition.Id == id);
+            return result.FirstOrDefault();
+        }
+
+        public async Task<Bill> Update(Bill bill)
+        {
+           await  _billCollection.ReplaceOneAsync(billToReplace => billToReplace.Id == bill.Id, bill);
             return bill;
         }
     }

@@ -5,6 +5,7 @@ using BarManagerA.Models.Requests;
 using BarManagerA.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace BarManagerA.Host.Controllers
 {
@@ -24,9 +25,9 @@ namespace BarManagerA.Host.Controllers
         }
 
         [HttpGet("getAll")]
-        public IActionResult GetAll()
+        public async Task <IActionResult> GetAll()
         {
-            var result = _billService.GetAll();
+            var result = await _billService.GetAll();
 
             if (result != null) return Ok(result);
 
@@ -34,9 +35,9 @@ namespace BarManagerA.Host.Controllers
         }
 
         [HttpGet("getById")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var result = _billService.GetById(id);
+            var result = await _billService.GetById(id);
 
             if (result == null) return NotFound(id);
 
@@ -46,39 +47,37 @@ namespace BarManagerA.Host.Controllers
         }
 
         [HttpPost("Create")]
-        public IActionResult Create([FromBody] BillRequest billRequest)
+        public async Task <IActionResult> Create([FromBody] BillRequest billRequest)
         {
             if (billRequest == null) return BadRequest();
 
             var tag = _mapper.Map<Bill>(billRequest);
 
-            var result = _billService.Create(tag);
+            var result = await _billService.Create(tag);
 
             return Ok(result);
         }
 
         [HttpDelete]
-        public IActionResult Delete(int id)
+        public async Task <IActionResult> Delete(int id)
         {
             if (id <= 0) return BadRequest(id);
 
-            var result = _billService.Delete(id);
+            await _billService.Delete(id);
 
-            if (result != null) return Ok(result);
-
-            return NotFound(result);
+           return Ok(id);
         }
 
         [HttpPost("Update")]
-        public IActionResult Update([FromBody] Bill bill)
+        public async Task<IActionResult> Update([FromBody] Bill bill)
         {
             if (bill == null) return BadRequest();
 
-            var searchBill = _billService.GetById(bill.Id);
+            var searchBill = await _billService.GetById(bill.Id);
 
             if (searchBill == null) return NotFound(bill);
 
-            var result = _billService.Update(bill);
+            var result =  await _billService.Update(bill);
 
             if (result != null) return Ok(result);
 

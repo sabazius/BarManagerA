@@ -3,6 +3,7 @@ using BarManagerA.DL.Interfaces;
 using BarManagerA.Models.DTO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BarManagerA.BL.Services
 {
@@ -15,31 +16,32 @@ namespace BarManagerA.BL.Services
             _billRepository = billRepository;
         }
 
-        public Bill Create(Bill bill)
+        public async Task<Bill> Create(Bill bill)
         {
-            var index = _billRepository.GetAll()?.OrderByDescending(x => x.Id).FirstOrDefault()?.Id;
 
+            var result =  await _billRepository.GetAll();
+            var index = result.OrderByDescending(x => x.Id).FirstOrDefault()?.Id;
             bill.Id = (int)(index != null ? index + 1 : 1);
 
-            return _billRepository.Create(bill);
+            return await _billRepository.Create(bill);
         }
 
-        public Bill Update(Bill bill)
+        public Task<Bill> Update(Bill bill)
         {
             return _billRepository.Update(bill);
         }
 
-        public Bill Delete(int id)
+        public Task Delete(int id)
         {
             return _billRepository.Delete(id);
         }
 
-        public Bill GetById(int id)
+        public Task<Bill> GetById(int id)
         {
             return _billRepository.GetById(id);
         }
 
-        public IEnumerable<Bill> GetAll()
+        public Task <IEnumerable<Bill>> GetAll()
         {
             return _billRepository.GetAll();
         }

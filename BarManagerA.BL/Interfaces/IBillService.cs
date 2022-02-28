@@ -1,18 +1,19 @@
 ﻿using BarManagerA.Models.DTO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BarManagerA.BL.Interfaces
 {
     public interface IBillService
     {
-        Bill Create(Bill bill);
+        Task <Bill> Create(Bill bill);
 
-        Bill Update(Bill bill);
+        Task <Bill> Update(Bill bill);
 
-        Bill Delete(int id);
+        Task Delete(int id);
 
-        Bill GetById(int id);
+        Task <Bill>  GetById(int id);
 
-        IEnumerable<Bill> GetAll();
+        Task <IEnumerable<Bill>> GetAll();
     }
 }
