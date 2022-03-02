@@ -23,33 +23,36 @@ namespace BarManagerA.DL.Repositories.MongoRepos
             _productsCollection = database.GetCollection<Products>("Products");
         }
 
-        public Products Create(Products products)
+        public async Task<Products> Create(Products products)
         {
-            _productsCollection.InsertOne(products);
+            await _productsCollection.InsertOneAsync(products);
+
             return products;
         }
 
-        public Products Delete(int id)
+        public async Task Delete(int id)
         {
-            var product = GetById(id);
-
-            _productsCollection.DeleteOne(Products => Products.Id == id);
-
-            return product;
+            await _productsCollection.DeleteOneAsync(Products => Products.Id == id);
         }
 
-        public IEnumerable<Products> GetAll()
+        public async Task<IEnumerable<Products>> GetAll()
         {
-           return _productsCollection.Find(products => true).ToList();
+            var result = await _productsCollection.FindAsync(products => true);
+
+            return result.ToEnumerable();
         }
 
-        public Products GetById(int id) =>
-            _productsCollection.Find(products => products.Id == id).FirstOrDefault();
-        
-
-        public Products Update(Products products)
+        public async Task<Products> GetById(int id)
         {
-            _productsCollection.ReplaceOne(productsToReplace => productsToReplace.Id == products.Id, products);
+            var result = await _productsCollection.FindAsync(products => products.Id == id);
+
+            return result.FirstOrDefault();
+        }
+
+        public async Task<Products> Update(Products products)
+        {
+            var result = await _productsCollection.ReplaceOneAsync(productsToReplace => productsToReplace.Id == products.Id, products);
+
             return products;
         }
     }

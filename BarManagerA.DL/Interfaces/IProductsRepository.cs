@@ -2,20 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BarManagerA.DL.Interfaces
 {
    public interface IProductsRepository
     {
-        Products Create(Products products);
+        Task<Products> Create(Products products);
 
-        Products Update(Products products);
+        Task<Products> Update(Products products);
 
-        Products Delete(int id);
+        Task Delete(int id);
 
-        Products GetById(int id);
+        Task<Products> GetById(int id);
 
-        IEnumerable<Products> GetAll();
+        Task<IEnumerable<Products>> GetAll();
 
     }
 }

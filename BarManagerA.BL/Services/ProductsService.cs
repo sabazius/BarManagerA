@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BarManagerA.BL.Services
 {
@@ -17,33 +18,34 @@ namespace BarManagerA.BL.Services
             _productsRepository = productsRepository;
         }
 
-        Products IProductsService.Create(Products products)
-        {         
-            var index = _productsRepository.GetAll()?.OrderByDescending(x => x.Id).FirstOrDefault()?.Id;
+       public async Task<Products> Create(Products products)
+        {
+            var result = await _productsRepository.GetAll();
+            var index =result.OrderByDescending(x => x.Id).FirstOrDefault()?.Id;
 
             products.Id = (int)(index != null ? index + 1 : 1);
 
-            return _productsRepository.Create(products);
+            return await _productsRepository.Create(products);
         }
 
-        Products IProductsService.Delete(int id)
+        public async Task Delete(int id)
         {
-            return _productsRepository.Delete(id);
+           await _productsRepository.Delete(id);
         }
 
-        IEnumerable<Products> IProductsService.GetAll()
+        public async Task<IEnumerable<Products>> GetAll()
         {
-            return _productsRepository.GetAll();
+            return await _productsRepository.GetAll();
         }
 
-        Products IProductsService.GetById(int id)
+        public Task<Products> GetById(int id)
         {
             return _productsRepository.GetById(id);
         }
 
-        Products IProductsService.Update(Products products)
+        public async Task<Products> Update(Products products)
         {
-            return _productsRepository.Update(products);
+            return await _productsRepository.Update(products);
         }
     }
 }
