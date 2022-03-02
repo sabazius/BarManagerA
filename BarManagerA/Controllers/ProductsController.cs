@@ -7,6 +7,7 @@ using BarManagerA.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BarManagerA.Host.Controllers
 {
@@ -24,9 +25,9 @@ namespace BarManagerA.Host.Controllers
         }
 
         [HttpGet("getAll")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _productsService.GetAll();
+            var result = await  _productsService.GetAll();
 
             if (result != null) return Ok(result);
 
@@ -36,9 +37,9 @@ namespace BarManagerA.Host.Controllers
         }
 
         [HttpGet("getById")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var result = _productsService.GetById(id);
+            var result = await  _productsService.GetById(id);
 
             if (result != null) return Ok(result);
 
@@ -49,39 +50,37 @@ namespace BarManagerA.Host.Controllers
         }
 
         [HttpPost("Create")]
-        public IActionResult Create ([FromBody] ProductsRequest productsRequest)
+        public async Task<IActionResult> Create ([FromBody] ProductsRequest productsRequest)
         {
             if (productsRequest == null) return BadRequest();
 
             var products = _mapper.Map<Products>(productsRequest);
 
-            var result = _productsService.Create(products);
+            var result = await _productsService.Create(products);
 
             return Ok(result);
         }
 
         [HttpPost("Delete")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id <= 0) return BadRequest();
 
-            var result = _productsService.Delete(id);
-
-            if (result != null) return Ok(result);
-
-            return NotFound(result);
+             await _productsService.Delete(id);  
+            
+            return Ok(id);
         }
 
         [HttpPost("Update")]
-        public IActionResult Update([FromBody] Products products)
+        public async Task<IActionResult> Update([FromBody] Products products)
         {
             if (products == null) return BadRequest();
 
-            var searchTag = _productsService.GetById(products.Id);
+            var searchTag = await _productsService.GetById(products.Id);
 
             if (searchTag == null) return NotFound(products);
 
-            var result = _productsService.Update(products);
+            var result = await _productsService.Update(products);
 
             if (result != null) return Ok(result);
 
